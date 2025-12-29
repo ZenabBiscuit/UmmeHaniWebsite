@@ -20,7 +20,7 @@ app.post('/newsletter', async (req, res) => {
   const to = recipients.map(email => ({ email }));
 
   const payload = {
-    sender: { name: 'UmmeHani', email: 'ummehani.arts@gmail.com' }, // verified sender
+    sender: { name: 'UmmeHani', email: 'ummehani.tin@gmail.com' }, // verified sender
     to,
     subject,
     htmlContent: html
