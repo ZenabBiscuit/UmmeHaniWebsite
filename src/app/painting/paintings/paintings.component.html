@@ -1,0 +1,25 @@
+<!-- Available Paintings -->
+<div class="paintings-grid">
+  <div *ngFor="let painting of availablePaintings" class="painting-card" [routerLink]="['/originals', painting.Id]">
+    <img [src]="painting.Image" [alt]="painting.Title">
+    <p class="painting-title">{{ painting.Title }}</p>
+    <!-- <p class="painting-price" *ngIf="(painting.Stock | lowercase) === 'available'">{{ painting.displayPrice }}</p>
+    <p class="sold-text" *ngIf="(painting.Stock | lowercase) === 'sold'">SOLD OUT</p>
+    <p class="painting-price" *ngIf="(painting.Price | lowercase) === 'price upon request'">Price upon request</p> -->
+  </div>
+</div>
+
+<!-- Sold Out Paintings -->
+<!-- <div class="sold-out-section" *ngIf="soldOutPaintings.length">
+  <p class="sold-out-header">Sold Out</p>
+  <p class="soldout-tagline">
+    These originals have found their homes, but commissions are still welcome!
+  </p>
+  <div class="paintings-grid">
+    <div *ngFor="let painting of soldOutPaintings" class="painting-card sold-out" [routerLink]="['/originals', painting.Id]">
+      <img [src]="painting.Image" [alt]="painting.Title">
+      <p class="painting-title">{{ painting.Title }}</p>
+      <p class="sold-text painting-price">SOLD OUT</p>
+    </div>
+  </div>
+</div> -->

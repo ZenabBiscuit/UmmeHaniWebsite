@@ -1,0 +1,83 @@
+.workshops-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+  justify-content: center;
+}
+
+.workshop-card {
+  background: var(--button); /* subtle off-white */
+  padding: 1rem;
+  border-radius: 0;
+  text-align: left;
+  border: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* subtle shadow */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* centers content vertically */
+  align-items: center; /* centers content horizontally */
+}
+
+.workshop-img {
+  width: 300px;
+  height: 300px; // fixed height for all images
+  object-fit: contain; // crop nicely instead of distorting
+  border-radius: 6px;
+  margin-bottom: 1rem; // subtle fallback color before image loads
+  
+    display: block;
+
+}
+
+.workshop-title {
+  font-size: 1.2rem;
+  margin-bottom: 0;
+  margin-top: 0;
+
+  span {
+    font-style: normal;
+  }
+}
+
+.workshop-price{
+  margin-top: 0.5rem;
+}
+
+.bundle-desc {
+  font-size: 13px;
+  color: #555;
+}
+
+.strike {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.discount {
+  // color: #ff4081;
+  // font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .workshop-img{
+    width: 100%;
+    height: auto;
+  }
+
+  .workshop-price,
+  .workshop-title,
+  .workshop-title,
+  .bundle-price{
+    align-self: flex-start;
+  }
+
+}
+
+
+/* Tablet & below: flexible layout */
+@media (max-width: 1023px) {
+  .workshops-grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+
+}

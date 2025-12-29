@@ -1,0 +1,57 @@
+<div class="checkout">
+  <!-- Left Section -->
+  <div class="checkout-form">
+    <form [formGroup]="emailForm" (ngSubmit)="placeOrder()">
+      <h2>Your Details</h2>
+
+      <div class="row">
+        <input type="text" formControlName="firstName" placeholder="First Name" />
+        <input type="text" formControlName="lastName" placeholder="Last Name" />
+      </div>
+      <div class="error" *ngIf="emailForm.get('firstName')?.touched && emailForm.get('firstName')?.invalid">
+        <small>First name is required.</small>
+      </div>
+      <div class="error" *ngIf="emailForm.get('lastName')?.touched && emailForm.get('lastName')?.invalid">
+        <small>Last name is required.</small>
+      </div>
+
+      <input type="email" formControlName="email" placeholder="Email address" />
+      <div class="error" *ngIf="emailForm.get('email')?.invalid && emailForm.get('email')?.touched">
+        <small *ngIf="emailForm.get('email')?.errors?.['required']">Email is required.</small>
+        <small *ngIf="emailForm.get('email')?.errors?.['pattern']">Enter a valid email address.</small>
+      </div>
+
+      <div class="row phone-row">
+        <select formControlName="countryCode" class="country-code">
+          <option *ngFor="let country of countryCodes" [value]="country.dial_code">
+            {{ country.flag }} ({{ country.dial_code }})
+          </option>
+        </select>
+        <input type="tel" formControlName="phone" placeholder="Phone Number" />
+      </div>
+      <div *ngIf="emailForm.get('phone')?.touched && emailForm.get('phone')?.invalid" class="error">
+        <small *ngIf="emailForm.get('phone')?.errors?.['required']">Phone number is required.</small>
+        <small *ngIf="emailForm.get('phone')?.errors?.['pattern']">Enter a valid phone number.</small>
+      </div>
+
+      <button type="submit" [disabled]="emailForm.invalid">Continue</button>
+    </form>
+  </div>
+
+  <!-- Right Section: Summary -->
+  <div class="checkout-summary">
+    <h3>Bundle Details</h3>
+
+    <div class="summary-item" *ngIf="bundle">
+      <img [src]="bundle.ThumbnailUrl" alt="bundle" />
+      <div class="product-details">
+        <p class="title">{{ bundle.Title }}</p>
+        <p *ngIf="bundle.OriginalPrice && bundle.BundlePrice">
+          <span class="original-price">₹{{ bundle.OriginalPrice }}</span>
+          <span>₹{{ bundle.BundlePrice }}</span>
+        </p>
+        <p *ngIf="bundle.RecordingIds?.length">Recordings: {{ bundle.RecordingIds.length }}</p>
+      </div>
+    </div>
+  </div>
+</div>

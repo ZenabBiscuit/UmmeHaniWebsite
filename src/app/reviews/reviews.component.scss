@@ -1,0 +1,92 @@
+.reviews-container {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+
+  p{
+    text-align: center;
+  }
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+    color: #222;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    .form-group {
+      text-align: left;
+
+      label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #555;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: border 0.3s ease;
+        box-sizing: border-box; // ✅ fixes overflow
+
+        &:focus {
+          border-color: #000;
+          outline: none;
+        }
+      }
+    }
+
+    button {
+      
+      align-self: center;
+  background: var(--button);
+  border: 1px solid black;
+  padding: 0.8rem 1.5rem;
+  cursor: pointer;
+  transition: background 0.3s;
+  
+  width: 100%;
+      &:hover:not(:disabled) {
+        background: var(--button-hover);
+      }
+
+      &:disabled {
+        cursor: not-allowed;
+        opacity: 0.6;
+        background: var(--button-disabled);
+      }
+    }
+  }
+
+  .success {
+    margin-top: 1rem;
+    color: var(--success);
+  }
+
+  .error {
+    margin-top: 1rem;
+    color: var(--error);
+  }
+}
+
+input.ng-invalid.ng-touched {
+  border-color:var(--error) !important;
+}
+
+textarea.ng-invalid.ng-touched {
+  border-color:var(--error) !important;
+}
+
+.feebdacktext{
+  text-align: justify !important;
+}

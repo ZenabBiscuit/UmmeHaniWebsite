@@ -1,0 +1,31 @@
+<div class="app-layout" [class.banner-visible]="bannerVisible">
+
+  <!-- Loader -->
+<div class="loader-overlay" *ngIf="loading">
+  <div class="dots-loader-container">
+    <div class="dots-loader">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <p class="loader-caption">Almost there...</p>
+  </div>
+</div>
+
+
+
+
+  <!-- Notification -->
+  <app-notification
+    (visibilityChange)="onNotificationVisibility($event)">
+  </app-notification>
+
+  <!-- Header -->
+  <app-header *ngIf="!isAdminRoute"></app-header>
+
+  <!-- Main Content -->
+  <main [ngClass]="isAdminRoute ? 'content-admin' : 'content'">
+    <router-outlet></router-outlet>
+  </main>
+
+</div>

@@ -1,0 +1,92 @@
+<div class="orders-main-container">
+  <!-- <h2>Manage Orders</h2> -->
+
+  <div class="filter-section">
+
+    <label for="filter">Filter by Prints:</label>
+    <select id="filter" [(ngModel)]="selectedOriginal">
+      <option value="">All</option>
+      <option *ngFor="let title of originalTitles" [value]="title">{{ title }}</option>
+    </select>
+    <label for="filter">Filter by Status:</label>
+    <select id="filter" [(ngModel)]="selectedStatusFilter">
+      <option value="">All</option>
+      <option *ngFor="let st of StatusForFilter" [value]="st">{{ st }}</option>
+    </select>
+
+    <!-- search bar -->
+        <label for="searchPurchase" class="labelPurchaseId">Search by Order ID:</label>
+        <input id="searchPurchase" type="text" [(ngModel)]="orderSearch" placeholder="Enter Order ID" />
+  </div>
+
+
+  <div *ngIf="loading">Loading orders...</div>
+  <div *ngIf="!loading && filteredOrders.length === 0">No orders found.</div>
+
+
+  <div class="orders-container">
+    <div *ngFor="let order of filteredOrders" class="order-card">
+       <!-- ✅ Send Whatsapp message section -->
+      <svg *ngIf="order.status === 'PaymentConfirmed'" class="email-icon  top-right" width="800px" height="800px" viewBox="0 0 24 24" version="1.1" id="svg8" (click)="sendWhatsappMessage(order)"
+        inkscape:version="0.92.4 (5da689c313, 2019-01-14)" sodipodi:docname="1881161.svg"
+        xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/"
+        xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+        xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:svg="http://www.w3.org/2000/svg"
+        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve">
+        <path id="path4" inkscape:connector-curvature="0"
+          d="M16.6,14c-0.2-0.1-1.5-0.7-1.7-0.8c-0.2-0.1-0.4-0.1-0.6,0.1c-0.2,0.2-0.6,0.8-0.8,1c-0.1,0.2-0.3,0.2-0.5,0.1c-0.7-0.3-1.4-0.7-2-1.2c-0.5-0.5-1-1.1-1.4-1.7c-0.1-0.2,0-0.4,0.1-0.5c0.1-0.1,0.2-0.3,0.4-0.4c0.1-0.1,0.2-0.3,0.2-0.4c0.1-0.1,0.1-0.3,0-0.4c-0.1-0.1-0.6-1.3-0.8-1.8C9.4,7.3,9.2,7.3,9,7.3c-0.1,0-0.3,0-0.5,0C8.3,7.3,8,7.5,7.9,7.6C7.3,8.2,7,8.9,7,9.7c0.1,0.9,0.4,1.8,1,2.6c1.1,1.6,2.5,2.9,4.2,3.7c0.5,0.2,0.9,0.4,1.4,0.5c0.5,0.2,1,0.2,1.6,0.1c0.7-0.1,1.3-0.6,1.7-1.2c0.2-0.4,0.2-0.8,0.1-1.2C17,14.2,16.8,14.1,16.6,14 M19.1,4.9C15.2,1,8.9,1,5,4.9c-3.2,3.2-3.8,8.1-1.6,12L2,22l5.3-1.4c1.5,0.8,3.1,1.2,4.7,1.2h0c5.5,0,9.9-4.4,9.9-9.9C22,9.3,20.9,6.8,19.1,4.9 M16.4,18.9c-1.3,0.8-2.8,1.3-4.4,1.3h0c-1.5,0-2.9-0.4-4.2-1.1l-0.3-0.2l-3.1,0.8l0.8-3l-0.2-0.3C2.6,12.4,3.8,7.4,7.7,4.9S16.6,3.7,19,7.5C21.4,11.4,20.3,16.5,16.4,18.9" />
+      </svg>
+      <h3>Order ID: {{ order.orderId }}</h3>
+      <div class="product">
+        <!-- <img [src]="order.product.Image" alt="{{ order.product.Title }}" /> -->
+        <div>
+          <p><strong>Originals Title: </strong>{{ order.product.Title }}</p>
+          <p><strong>Amount: </strong>₹{{order.product.Price}}</p>
+          <!-- <p>{{ order.product.Description }}</p>
+        <p>Medium: {{ order.product.Medium }}</p>
+        <p>Size: {{ order.product.Size }}</p>
+        <p>Price: ₹{{ order.product.Price }}</p>
+        <p>Shipping: ₹{{ order.product.ShippingCharges }}</p>
+        <p><strong>Total: ₹{{ order.product.TotalPrice }}</strong></p> -->
+        </div>
+      </div>
+      <p><strong>Customer Name:</strong> {{ order.address.firstName }} {{ order.address.lastName }}</p>
+      <p><strong>Email:</strong> {{ order.email }}</p>
+      <p><strong>Contact:</strong> {{ order.address.phone }}</p>
+
+      <p><strong>Address:</strong> {{ order.address.address1 }}, {{ order.address.address2 }},
+        {{ order.address.city }}, {{ order.address.state }} - {{ order.address.zip }}, {{ order.address.country }}</p>
+
+
+        <div class="status-row">
+      <!-- <label for="status"><strong>Status: </strong></label> -->
+      <select id="status" [(ngModel)]="selectedStatuses[order.id!]" (ngModelChange)="onStatusChange(order, $event)">
+        <option *ngFor="let s of statuses" [value]="s">{{ s }}</option>
+      </select>
+
+      <!-- 💾 Save Icon -->
+            <svg *ngIf="selectedStatuses[order.id!] !== order.status" (click)="saveStatus(order)"
+                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round" class="save-icon">
+                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
+                <polyline points="17 21 17 13 7 13 7 21" />
+                <polyline points="7 3 7 8 15 8" />
+            </svg>
+
+            <!-- Optional disabled look -->
+            <svg *ngIf="selectedStatuses[order.id!] === order.status" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                fill="none" stroke="#ccc" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+                class="save-icon disabled">
+                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
+                <polyline points="17 21 17 13 7 13 7 21" />
+                <polyline points="7 3 7 8 15 8" />
+            </svg>
+
+            </div>
+      <!-- ✅ Success/Error Messages -->
+      <p class="success" *ngIf="order.id && successMessages[order.id]">{{ successMessages[order.id] }}</p>
+      <p class="error" *ngIf="order.id && errorMessages[order.id]">{{ errorMessages[order.id] }}</p>
+    </div>
+  </div>
+</div>

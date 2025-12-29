@@ -1,0 +1,79 @@
+<div class="checkout">
+  <!-- Left Section -->
+  <div class="checkout-form">
+    <!-- Step 1: Email -->
+    <form [formGroup]="emailForm" (ngSubmit)="continueWithEmail()">
+  <h2>Your Email</h2>
+  <input 
+    type="email" 
+    formControlName="email" 
+    placeholder="Email address" 
+    [readonly]="step === 2"   
+  />
+    <div class="error" *ngIf="emailForm.get('email')?.invalid && emailForm.get('email')?.touched">
+        <small *ngIf="emailForm.get('email')?.errors?.['required'] && emailForm.get('email')?.errors?.['whitespace']">Email is required.</small>
+        <small *ngIf="emailForm.get('email')?.errors?.['pattern']">Enter a valid email address.</small>
+    </div>
+  <button 
+    type="submit" 
+    [disabled]="step === 2 || emailForm.invalid">
+    Continue
+  </button>
+</form>
+
+    <!-- Step 2: Address -->
+    <form *ngIf="step === 2" [formGroup]="addressForm" (ngSubmit)="placeOrder()">
+      <h2>Your Details</h2>
+      <div class="row">
+        <input type="text" formControlName="firstName" placeholder="First Name" />
+        <div class="error" *ngIf="addressForm.get('firstName')?.invalid && addressForm.get('firstName')?.touched">
+            <small *ngIf="addressForm.get('firstName')?.errors?.['required'] || addressForm.get('firstName')?.errors?.['whitespace']">
+                First name is required.
+            </small>
+        </div>
+        <input type="text" formControlName="lastName" placeholder="Last Name" />
+        <div class="error" *ngIf="addressForm.get('lastName')?.invalid && addressForm.get('lastName')?.touched">
+            <small *ngIf="addressForm.get('lastName')?.errors?.['required'] || addressForm.get('lastName')?.errors?.['whitespace']">
+                Last name is required.
+            </small>
+        </div>
+      </div>
+        
+      <div class="phone-row">
+  <select class="country-code" formControlName="countryCode">
+  <option *ngFor="let country of countryCodes" [value]="country.dial_code">
+    {{country.flag}} ({{ country.dial_code }})
+  </option>
+</select>
+  <input type="tel" formControlName="phone" placeholder="Phone Number" />
+</div>
+<div *ngIf="addressForm.get('phone')?.touched && addressForm.get('phone')?.invalid" class="error">
+  <small *ngIf="addressForm.get('phone')?.errors?.['required']">Phone number is required</small>
+  <small *ngIf="addressForm.get('phone')?.errors?.['pattern']">Enter a valid phone number</small>
+</div>
+
+      <button type="submit" [disabled]="addressForm.invalid">Continue to Payment</button>
+    </form>
+  </div>
+
+  <!-- Right Section: Order Summary -->
+  <div class="checkout-summary">
+  <h3>Workshop Details</h3>
+
+  <!-- Product row -->
+  <div class="summary-item">
+    <img [src]="product.Image" alt="product" />
+    <div class="product-details">
+      <p class="title">{{ product.Title }}</p>
+      <p class="title">{{ product.ModeSelected }}</p>
+    </div>
+  </div>
+
+  <!-- Totals -->
+  <div class="summary-totals">
+    <div class="row total">
+      <span>Registration Fee</span>
+      <span>₹{{ product.Fees }}</span>
+    </div>
+  </div>
+</div>

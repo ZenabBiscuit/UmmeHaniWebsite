@@ -1,0 +1,75 @@
+<div class="checkout">
+  <!-- Left Section -->
+  <div class="checkout-form">
+
+    <!-- Step 1: Email + Name + Phone -->
+    <form [formGroup]="emailForm" (ngSubmit)="placeOrder()">
+      <h2>Your Details</h2>
+
+      <!-- Full Name -->
+      <div class="row">
+        <input type="text" formControlName="firstName" placeholder="First Name" />
+        <input type="text" formControlName="lastName" placeholder="Last Name" />
+      </div>
+
+      <div class="error" *ngIf="emailForm.get('firstName')?.touched && emailForm.get('firstName')?.invalid">
+        <small>First name is required.</small>
+      </div>
+
+      <div class="error" *ngIf="emailForm.get('lastName')?.touched && emailForm.get('lastName')?.invalid">
+        <small>Last name is required.</small>
+      </div>
+
+      <!-- Email -->
+      <input 
+        type="email" 
+        formControlName="email" 
+        placeholder="Email address"
+      />
+      <div class="error" *ngIf="emailForm.get('email')?.invalid && emailForm.get('email')?.touched">
+        <small *ngIf="emailForm.get('email')?.errors?.['required']">Email is required.</small>
+        <small *ngIf="emailForm.get('email')?.errors?.['pattern']">Enter a valid email address.</small>
+      </div>
+
+      <!-- Phone -->
+      <div class="row phone-row">
+        <select formControlName="countryCode" class="country-code">
+          <option *ngFor="let country of countryCodes" [value]="country.dial_code">
+            {{ country.flag }} ({{ country.dial_code }})
+          </option>
+        </select>
+
+        <input type="tel" formControlName="phone" placeholder="Phone Number" />
+      </div>
+
+      <div *ngIf="emailForm.get('phone')?.touched && emailForm.get('phone')?.invalid" class="error">
+        <small *ngIf="emailForm.get('phone')?.errors?.['required']">Phone number is required.</small>
+        <small *ngIf="emailForm.get('phone')?.errors?.['pattern']">Enter a valid phone number.</small>
+      </div>
+
+      <!-- Submit -->
+      <button type="submit" [disabled]="emailForm.invalid">
+        Continue
+      </button>
+    </form>
+  </div>
+
+  <!-- Right Section: Summary -->
+  <div class="checkout-summary">
+    <h3>Recording Details</h3>
+
+    <div class="summary-item">
+      <img [src]="product.ThumbnailUrl" alt="product" />
+      <div class="product-details">
+        <p class="title">{{ product.Title }}</p>
+      </div>
+    </div>
+
+    <div class="summary-totals">
+      <div class="row total">
+        <span>Access Fee</span>
+        <span>₹{{ product.Price }}</span>
+      </div>
+    </div>
+  </div>
+</div>

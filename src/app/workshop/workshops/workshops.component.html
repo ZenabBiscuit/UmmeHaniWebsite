@@ -1,0 +1,86 @@
+<div class="workshops-grid">
+
+  <ng-container *ngFor="let item of gridItems">
+
+    <!-- BUNDLE CARD -->
+<div
+  *ngIf="item.type === 'bundle' && item.data"
+  class="workshop-card bundle-card"
+  [routerLink]="(item.data.Status | lowercase) === 'active' ? ['/recording-bundle', item.data.BundleId] : null"
+  [class.inactive]="(item.data.Status | lowercase) !== 'active'"
+>
+  <img
+    [src]="item.data.ThumbnailUrl"
+    alt="Recording Bundle"
+    class="workshop-img"
+  />
+
+  <p class="workshop-title">📦 {{ item.data.Title }}</p>
+
+  <p class="bundle-price">
+    <span class="strike">₹ {{ item.data.OriginalPrice }}</span>
+    <br />
+    <span>₹ {{ item.data.BundlePrice }} </span>
+    <i class="discount">({{ item.data.DiscountPercent }}% OFF)</i>
+  </p>
+</div>
+
+    <!-- 🎨 WORKSHOP CARD -->
+    <div
+      *ngIf="item.type === 'workshop'"
+      class="workshop-card"
+      [routerLink]="['/workshops', item.data.Id]"
+    >
+      <img
+        [src]="item.data.Image"
+        [alt]="item.data.Title"
+        class="workshop-img"
+      />
+
+      <p class="workshop-title">
+        {{ item.data.Title }}
+      </p>
+
+      <!-- ACTIVE -->
+      <p
+        class="workshop-price"
+        *ngIf="(item.data.Status | lowercase) === 'active'"
+      >
+        <span *ngIf="(item.data.OnlineMode | lowercase) === 'yes'">
+          ₹ {{ item.data.RegistrationFeeOnline }} (Online)
+        </span>
+
+        <span
+          *ngIf="
+            (item.data.OnlineMode | lowercase) === 'yes' &&
+            (item.data.OfflineMode | lowercase) === 'yes'
+          "
+        >
+          <br />
+        </span>
+
+        <span *ngIf="(item.data.OfflineMode | lowercase) === 'yes'">
+          ₹ {{ item.data.RegistrationFeeOffline }} (Offline)
+        </span>
+      </p>
+
+      <!-- INACTIVE -->
+      <p
+        class="workshop-price"
+        *ngIf="(item.data.Status | lowercase) === 'inactive'"
+      >
+        Completed
+      </p>
+
+      <!-- CLOSED -->
+      <p
+        class="workshop-price"
+        *ngIf="(item.data.Status | lowercase) === 'closed'"
+      >
+        Registrations closed
+      </p>
+    </div>
+
+  </ng-container>
+
+</div>

@@ -1,0 +1,146 @@
+/* Desktop (default) */
+.header {
+  position: fixed;
+  // font-family: 'Helvetica Neue', Arial, sans-serif;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 220px;
+  // border-right: 1px solid #e5dfd3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem;
+  z-index: 1000;
+
+  .logo {
+    padding-top: 1rem;
+    margin-bottom: 2rem;
+      text-align: center;
+
+    a {
+      font-family: 'LogoFont', sans-serif;
+      font-size: 3rem;
+      line-height: 2;
+      color: #2C2C2C;
+      text-decoration: none;
+    }
+  }
+
+  .menu {
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    text-align: center;
+
+    a {
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #2C2C2C;
+      text-decoration: none;
+      transition: color 0.3s ease;
+
+      &:hover,
+      &.active {
+        color: #C2A78F;
+      }
+    }
+  }
+
+  .menu-toggle {
+    display: none; // ✅ hidden on desktop
+  }
+}
+
+body {
+  margin-left: 220px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .header {
+    width: 100%;
+    height: 3.8rem;              // ✅ fixed height for top bar
+    padding: 0 1rem;           // ✅ space inside header
+    flex-direction: row;       
+    justify-content: space-between;  // ✅ logo left, button right
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: var(--header);
+    z-index: 2000;
+    border-bottom: 1px solid #e5dfd3; // ✅ subtle divider like theme
+  }
+  
+
+  .header .menu-toggle {
+    display: block;
+    position: absolute;  // use absolute relative to header
+    top: 50%;            // move to vertical middle
+    right: 3rem;         // keep distance from right
+    transform: translateY(-50%);
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 3000;     // ✅ ensures it stays above menu
+    color: black !important;
+  }
+
+  .header .logo {
+    margin: 0;
+    z-index: 3000;
+
+    a {
+      font-size: 1.3rem;
+      line-height: 0;
+    }
+
+    .logo{
+      padding-top: 0 !important;
+    }
+  }
+
+  .header .menu {
+    position: fixed;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: #f6f2ea;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    transition: top 0.3s ease;
+    z-index: 1500;
+  }
+
+  .header .menu.open {
+    top: 0;
+  }
+
+
+  body {
+    margin-left: 0;
+  }
+}
+
+
+.header .menu-toggle,
+.header a {
+  outline: none;
+  background: none;
+  border: none;
+  -webkit-tap-highlight-color: transparent; /* removes blue tap flash on mobile */
+}
+
+.header .menu-toggle:focus,
+.header .menu-toggle:active {
+  outline: none;
+  background: none;
+  box-shadow: none;
+}

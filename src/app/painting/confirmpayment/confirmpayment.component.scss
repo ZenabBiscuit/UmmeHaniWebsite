@@ -1,0 +1,61 @@
+.payment-confirmation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+
+
+  h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #2c2c2c;
+  }
+
+  p {
+    margin: 0.4rem 0;
+    color: #444;
+    text-align: center;
+
+    strong {
+      color: #000;
+    }
+  }
+
+}
+
+
+hr {
+  border: none;
+  border-top: 1px solid #aaa;
+  width: 90%;
+  /* shorter width */
+  margin: 1rem auto;
+  /* center */
+}
+
+.italic-text {
+  font-style: italic;
+}
+
+.important {
+  color: #be1616 !important;
+}
+
+.purchaseDet {
+  margin-top: 3rem;
+}
+
+
+.recordings-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.instagram-link{
+color: #444 !important;
+  text-decoration: underline;
+  font-style: italic;
+}

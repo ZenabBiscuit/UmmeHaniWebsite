@@ -1,0 +1,62 @@
+.notification-banner {
+  width: 100%;
+  background-color: #79babd;
+  color: #fff;
+  text-align: center;
+  padding: 0.3rem 0.3rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  animation: slideDown 0.5s ease;
+
+  p {
+    margin: 0;
+    flex: 1 ;
+    text-align: center;
+  }
+
+  .close-btn {
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    margin-right: 1rem;
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+
+.notification-banner{
+    z-index: 4000;
+}
+
+// /* --- Mobile Header Adjustment When Notification is Visible --- */
+// @media (max-width: 768px) {
+//   app-header {
+//     top: 0; /* default */
+//     transition: top 0.3s ease;
+//   }
+
+//   .notification-banner {
+//     top: 40px; /* push header down by banner height */
+//   }
+// }
+

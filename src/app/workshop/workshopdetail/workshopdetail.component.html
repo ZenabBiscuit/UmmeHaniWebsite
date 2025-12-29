@@ -1,0 +1,52 @@
+<div class="painting-detail" *ngIf="workshop">
+  <div class="painting-image">
+    <img [src]="workshop.Image" [alt]="workshop.Title" class="workshopimg"/>
+    
+  </div>
+
+  <div class="workshop-info">
+    <h2>
+      {{ workshop.Title }}
+    </h2>
+    <p class="description">{{ workshop.Description }}</p>
+    <p class="totalPrice" *ngIf="(workshop.Status | lowercase) === 'active'">Registration Fee: ₹ {{ selectedPrice }}</p>
+    <p class="date">Date: <span>{{ workshop.Date }}</span></p>
+    <p class="time">Time: <span>{{ workshop.Time }}</span></p>
+    <p class="venue" *ngIf="selectedMode==='Offline'">Venue: <span>{{ workshop.Venue }}</span></p>
+    
+    <p class="notes" *ngIf="notesList.length > 0">🧰Materials You’ll Need:</p>
+    <ul class="notes-list" *ngIf="notesList.length > 0">
+      <li *ngFor="let note of notesList">{{ note }}</li>
+    </ul>
+
+          
+    <p class="notes">{{workshop.Note}}</p>
+
+    <div class="modesOfWorkshop" *ngIf="(workshop.Status | lowercase) === 'active'">
+
+      <div class="size-options" *ngIf="modes.length > 0">
+          <div class="size-buttons">
+              <button
+              *ngFor="let m of modes; let i = index"
+              [class.active]="m === selectedMode"
+              (click)="selectMode(i)">
+              {{ m }}
+              </button>
+          </div>
+      </div>
+        <button class="add-to-cart" (click)="checkOut()">REGISTER NOW</button>
+
+    </div>
+
+    <p class="workshopover2" *ngIf="(workshop?.ShowRecording | lowercase) === 'yes'">
+        Missed the live session? No worries, head to the <a [routerLink]="['/recordings', workshop.RecordingId]">Recording</a> to grab the full workshop!
+    </p>
+    
+    
+    <div *ngIf="(workshop.Status | lowercase) === 'closed'">
+      <p class="workshopover">
+        Registrations closed!
+      </p>
+    </div>
+    
+  </div>

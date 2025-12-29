@@ -1,0 +1,27 @@
+<div class="reviews-container">
+  <!-- <h2>Manage Reviews</h2> -->
+
+  <div *ngIf="loading">Loading reviews...</div>
+
+  <div *ngIf="!loading && reviews.length === 0">
+    No reviews found.
+  </div>
+
+  <div *ngFor="let review of reviews; let i = index" class="review-card">
+    <h3>{{ review.name }}, {{ review.city }}</h3>
+    <p>{{ review.review }}</p>
+    <p>Status: <strong>{{ review.status }}</strong></p>
+
+    <button (click)="setStatus(review, 'approved')" [disabled]="review.status === 'approved'">
+      Approve
+    </button>
+
+    <button (click)="setStatus(review, 'rejected')" [disabled]="review.status === 'rejected'">
+      Reject
+    </button>
+
+    <!-- Sorting controls -->
+    <button (click)="changeSort(review, 'up')" [disabled]="i === 0">↑</button>
+    <button (click)="changeSort(review, 'down')" [disabled]="i === reviews.length - 1">↓</button>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<div class="payment">
+  <h2>Complete Your Payment</h2>
+  <p>Amount: ₹{{ amount }}</p>
+
+  <!-- Clickable UPI Link -->
+  <div class="upi-link">
+    <a [href]="upiUrl" target="_blank" (click)="onUpiLinkClick()">Click here to pay with UPI App</a>
+  </div>
+  <p>OR</p>
+  <!-- QR Code -->
+  <qrcode [qrdata]="upiUrl" [width]="200" [errorCorrectionLevel]="'M'"></qrcode>
+  
+  
+
+
+  <!-- Shown only after user clicks UPI link -->
+  <ng-container *ngIf="upiLinkClicked">
+    <hr class="section-separator" />
+
+    <p class="msgConfirmation">Click on button below after you have completed the payment!</p>
+    <button (click)="confirmPayment()" class="confirmPayment" [disabled]="isSubmitting">{{ isSubmitting ?
+      'Processing...' : 'I have paid' }}</button>
+  </ng-container>
+</div>

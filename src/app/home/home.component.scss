@@ -1,0 +1,415 @@
+.shop-header {
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  .shop-tagline {
+    font-size: 1rem;
+    text-align: center;
+    color: #666;       // softer than main title
+    font-style: italic; // optional, gives artistic feel
+}
+.cards-collection,
+.cards-workshops,
+.cards-recordings {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); // responsive 2-3 cards per row
+  gap: 1.5rem;
+  max-width: 900px; // keeps content from stretching too wide
+  margin: 0 auto;     // center on large screens
+  padding: 0 1rem;    // small side padding
+  justify-items: center;
+}
+
+.card {
+  max-width: 100%;
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-image {
+  position: relative;
+  width: 400px;
+  height: 250px;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  &:hover img {
+    transform: scale(1.1);
+  }
+
+  .card-overlay {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: white;
+    z-index: 2;
+
+    h3 {
+      font-size: 1.5rem;
+      font-weight: 100;
+      margin: 0 0 1rem 0;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+      color: var(--card-text);
+      // background-color: rgba(222, 207, 185, 0.65);
+    }
+
+    button {
+      background: #f6f2ea;
+      color: black;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+
+      &:hover {
+        background: #ddd;
+      }
+    }
+  }
+}
+
+
+@media (max-width: 768px) {
+  .cards-collection,
+  .cards-workshops,
+  .cards-recordings {
+    grid-template-columns: 1fr;
+  }
+
+
+  .card .card-image {
+    width: 100%;
+    overflow: hidden;
+  }
+
+   img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; // ✅ crops while maintaining proportions
+    }
+}
+
+/* Keep your .cards styles as-is */
+
+/* gallery scss */
+
+.gallery-section {
+  text-align: center;
+
+  .gallery-header {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+  }
+}
+
+.carousel {
+  position: relative;
+  max-width: 1000px;
+  margin: auto;
+  overflow: hidden;
+}
+
+.carousel-track {
+  display: flex;
+  flex-wrap: nowrap;
+  transition: transform 0.6s ease-in-out;
+}
+
+.gallery-item {
+  flex: 0 0 calc((100% - 3rem) / 3); 
+  padding: 0 0.5rem;
+  img {
+    width: 100%;
+    height: 250px !important;
+    object-fit: contain;
+    border-radius: 12px;
+  }
+}
+.nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0);
+  color: #222;
+  border: none;
+  padding: 0.8rem 1.2rem;
+  cursor: pointer;
+  font-size: 1.5rem;
+  border-radius: 50%;
+  z-index: 10;
+
+  &.prev {
+    left: 0;
+  }
+  &.next {
+    right: 0;
+  }
+}
+
+// Tablet (max-width: 1024px)
+@media (max-width: 1024px) {
+  .gallery-item {
+    flex: 0 0 calc((100% - 2rem) / 2);
+  }
+}
+
+// Mobile (max-width: 768px)
+@media (max-width: 768px) {
+  .gallery-item {
+    flex: 0 0 calc((100% - 1rem) / 1);
+  }
+
+  .gallery-item img {
+    // height: 200px;
+  }
+
+}
+
+
+
+/* reviews scss */
+/* reviews section */
+.reviews-section {
+  text-align: center;
+
+  .review-header {
+    font-size: 1.5rem;
+  }
+}
+
+.carousel-reviews {
+  position: relative;
+  max-width: 600px;
+  margin: auto;
+  overflow: hidden;
+  align-items: center;
+}
+
+.carousel-track-reviews {
+  display: flex;
+  flex-wrap: nowrap;
+  transition: transform 0.6s ease-in-out;
+  width: 100%; // ensures each slide aligns perfectly
+  align-items: center;
+}
+
+.review-card {
+  flex: 0 0 100%; // ✅ each review takes full width of carousel
+  box-sizing: border-box;
+  justify-content: center;
+
+  .review-text {
+    font-style: italic;
+    margin-bottom: 1rem;
+    padding: 0 1.5rem;
+  }
+
+  .review-name {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+  }
+
+  .review-date {
+    font-size: 0.9rem;
+    color: #666;
+  }
+}
+
+/* nav buttons */
+.nav-reviews {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  color: #222;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  border-radius: 50%;
+  z-index: 10;
+
+  &.prev {
+    left: 0;
+  }
+  &.next {
+    right: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .carousel-reviews {
+    max-width: 90%; // slightly tighter on mobile
+  }
+
+  .review-text {
+    font-size: 1rem;
+  }
+
+  .copyrights{
+    margin-bottom: -1rem;
+  }
+}
+
+.section-separator {
+  margin-top: 7rem;
+  margin-bottom: 3rem;
+}
+
+.section-separator-between {
+  margin: 2rem 0;
+}
+
+
+.section-separator-hr {
+  margin: 3rem 0;
+}
+
+
+::ng-deep app-contact .newsletter-container {
+  padding: 0rem !important;
+}
+
+.copyrights{
+  text-align: center;
+  padding-top: 1rem;
+}
+
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeIn 0.4s ease-in forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+.hero {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+
+  background: linear-gradient(
+    rgba(249, 246, 241, 0.9),
+    rgba(249, 246, 241, 0.9)
+  ),
+  url('https://wherewonderwaits.com/wp-content/uploads/2021/10/creative-artist-date-ideas-1024x768.jpg') center / cover no-repeat;
+}
+
+.hero-content {
+  max-width: 700px;
+
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 300;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 1.1rem;
+    color: #555;
+  }
+}
+
+
+.card {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.card-overlay h3 {
+  font-size: 1.3rem;
+  letter-spacing: 0.5px;
+  
+      color: var(--card-text);
+}
+
+.card-image:hover img {
+  transform: scale(1.05); // instead of 1.1
+}
+
+
+
+.launch-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: var(--button); // your site background
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  animation: fadeOut 0.8s ease forwards;
+  animation-delay: 1.2s;
+}
+
+.launch-content {
+  text-align: center;
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+.launch-title {
+  font-family: 'LogoFont', serif;
+  font-weight: 100;
+  font-size: 2.5rem;
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+}
+
+.launch-subtitle {
+  font-size: 1rem;
+  opacity: 0.7;
+  letter-spacing: 1px;
+}
+
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* Optionally hide homepage content while launch is visible */
+.homepage-content.hidden {
+  visibility: hidden;
+  pointer-events: none;
+}
+

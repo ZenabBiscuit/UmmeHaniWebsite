@@ -1,0 +1,32 @@
+<!-- Popup -->
+<div *ngIf="showPopup" class="popup-overlay">
+  <div class="popup">
+    <h2>🔐 Verify Access</h2>
+
+    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+
+    <label>Email</label>
+    <input type="email" [(ngModel)]="email" placeholder="Enter your email" />
+
+    <label>Secret Key</label>
+    <input type="text" [(ngModel)]="secretKey" placeholder="Enter your secret key" />
+
+    <button (click)="verifyAccess()">Submit</button>
+  </div>
+</div>
+
+
+
+<!-- Recording Player -->
+<div *ngIf="!showPopup && recording" class="recording-container">
+    <h1>{{ recording.Title }}</h1>
+  <!-- Actual iframe -->
+  <div class="iframe-wrapper"> 
+    <iframe  
+      [src]="getDriveDirectUrl(recording?.RecordingUrl) | safeUrl" 
+      frameborder="0"
+      allowfullscreen
+      sandbox="allow-scripts allow-same-origin">
+  </iframe>
+  </div>
+</div>

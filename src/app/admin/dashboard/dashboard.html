@@ -1,0 +1,34 @@
+<div class="newsletter-admin">
+  <h2>Send Newsletter</h2>
+
+  <form (ngSubmit)="sendNewsletter()">
+    <input [(ngModel)]="subject" name="subject" placeholder="Subject" required />
+    <textarea [(ngModel)]="message" name="message" placeholder="Message" rows="6" required></textarea>
+
+    <div class="subscriber-controls">
+      <label>
+        <input type="checkbox" [(ngModel)]="selectAll" name="selectAll" (change)="toggleSelectAll()" />
+        Select All Subscribers
+        <span>
+          ({{ selectedCount() }} selected)
+        </span>
+      </label>
+
+    </div>
+
+    <div class="subscribers-list">
+      <div *ngFor="let sub of subscribers; let i = index">
+        <label>
+          <input type="checkbox" [(ngModel)]="sub.selected" name="subscriber_{{i}}" />
+          {{ sub.email }}
+        </label>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="!subject || !message || isSending">
+      {{ isSending ? 'Sending...' : 'Send to Selected Subscribers' }}
+    </button>
+  </form>
+
+  <div class="status-msg" [ngClass]="{ error: isError }">{{ statusMsg }}</div>
+</div>

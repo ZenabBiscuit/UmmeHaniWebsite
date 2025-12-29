@@ -1,0 +1,222 @@
+.orders-main-container {
+  padding: 1rem;
+}
+
+.orders-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+
+/* Card */
+.order-card {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  background: #fafafa;
+  position: relative;
+}
+
+
+/* Save Button */
+button {
+  margin-left: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.3s ease;
+  display: inline-block;
+}
+
+button:hover {
+  background: #45a049;
+}
+
+button:disabled {
+  background: #bbb;
+  cursor: not-allowed;
+}
+
+/* Success & Error messages */
+.success {
+  color: var(--success);
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+
+.error {
+  color: var(--error);
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+
+/* Filter section */
+.filter-section {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.filter-section label {
+  margin-right: 0.5rem;
+  font-weight: bold;
+}
+
+/* Status dropdown inside cards */
+.order-card select {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  min-width: 150px;
+}
+
+/* ✅ Responsive (Mobile) */
+@media (max-width: 768px) {
+  .order-card {
+    padding: 0.8rem;
+  }
+
+  .filter-section {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .filter-section label,
+  .labelPurchaseId {
+    margin-bottom: 0.4rem;
+    padding-left: 0 !important;
+  }
+
+  .order-card select {
+    width: 100%;
+    font-size: 1rem;
+  }
+
+  button {
+    margin-top: 0.8rem;
+    margin-left: 0;
+    width: 100%;
+    font-size: 1rem;
+  }
+}
+
+.labelPurchaseId,
+.payment-status-filter {
+  padding-left: 1rem;
+}
+
+/* Filter section inputs */
+.filter-section input,
+.filter-section select {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  box-sizing: border-box;
+  /* important for width calculations */
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+
+  .filter-section input,
+  .filter-section select {
+    width: 100%;
+    /* full width on mobile */
+    font-size: 1rem;
+  }
+
+  .labelPurchaseId,
+  .payment-status-filter {
+    padding-top: 1rem;
+    padding-left: 0 !important;
+  }
+}
+
+/* ✅ tablet responsiveness */
+@media (max-width: 1024px) {
+  .orders-container {
+    grid-template-columns: repeat(2, 1fr);
+    /* 2 per row on tablet */
+  }
+}
+
+@media (max-width: 768px) {
+  .orders-container {
+    grid-template-columns: 1fr;
+    /* 1 per row on mobile */
+  }
+}
+.email-icon,
+.email-sent-icon {
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  transition: transform 0.2s ease, stroke 0.2s ease;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.email-icon:hover {
+  transform: scale(1.15);
+  stroke: #0078d7; /* subtle hover highlight */
+}
+
+.email-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 500;
+  color: var(--success);
+  margin-left: 5px;
+}
+
+.save-icon {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  margin-left: 8px;
+  transition: transform 0.2s ease, stroke 0.2s ease;
+  vertical-align: middle;
+  stroke: var(--success);
+}
+
+.save-icon:hover {
+  transform: scale(1.15);
+  stroke: lightseagreen;
+}
+
+.save-icon.disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+  pointer-events: none;
+  stroke: grey;
+}
+
+
+.email-icon.top-right {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+/* Align dropdown and save icon horizontally */
+.status-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+h3{
+      margin: 0 !important;
+}

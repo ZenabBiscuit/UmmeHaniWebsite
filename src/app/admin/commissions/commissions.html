@@ -1,0 +1,16 @@
+<div class="commissions-admin">
+  <!-- <h2>Commission Requests</h2> -->
+
+  <div *ngIf="loading">Loading commission requests...</div>
+  <div *ngIf="!loading && requests.length === 0">No commission requests yet.</div>
+
+  <div *ngFor="let req of requests" class="request-card">
+    <h3>Name: {{ req.name }}</h3>
+    <p><strong>Email: </strong> {{ req.email }}</p>
+    <p><strong>Request: </strong> {{ req.request }}</p>
+    <p><strong>Submission Date: </strong> {{ req.createdAt?.toDate() | date:'medium' }}</p>
+    <p><strong>Phone Number: </strong>{{req.phone}}</p>
+
+    <button (click)="deleteRequest(req)">Delete</button>
+  </div>
+</div>

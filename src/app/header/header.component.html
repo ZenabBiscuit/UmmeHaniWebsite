@@ -1,0 +1,25 @@
+<header class="header">
+  <div class="logo">
+    <a routerLink="/"><span style="color: transparent;">..</span>Umme Hani</a>
+  </div>
+
+  <!-- Sidebar Menu -->
+  <nav class="menu" [class.open]="menuOpen">
+    <!-- <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="menuOpen=false">Home</a> -->
+    <a routerLink="/originals" routerLinkActive="active" (click)="menuOpen=false">Originals</a>
+    <a routerLink="/prints" routerLinkActive="active" (click)="menuOpen=false">Prints</a>
+    <a routerLink="/workshops" routerLinkActive="active" (click)="menuOpen=false">Workshops</a>
+    <!-- <a routerLink="/recordings" routerLinkActive="active" (click)="menuOpen=false">Recordings</a> -->
+    <!-- <a routerLink="/gallery" routerLinkActive="active" (click)="menuOpen=false">Gallery</a> -->
+    <a routerLink="/collaborations" routerLinkActive="active" (click)="menuOpen=false">Collaborations</a>
+    <a routerLink="/write-a-review" routerLinkActive="active" (click)="menuOpen=false">Write a Review</a>
+    <a routerLink="/about-ummehani" routerLinkActive="active" (click)="menuOpen=false">About Me</a>
+    <a routerLink="/contact" routerLinkActive="active" (click)="menuOpen=false">Contact</a>
+    <a routerLink="/commissions" routerLinkActive="active" (click)="menuOpen=false">Commissions</a>
+  </nav>
+
+  <!-- Toggle Button (only visible on mobile) -->
+  <button class="menu-toggle" (click)="toggleMenu()">
+    {{ menuOpen ? '✖' : '☰' }}
+  </button>
+</header>

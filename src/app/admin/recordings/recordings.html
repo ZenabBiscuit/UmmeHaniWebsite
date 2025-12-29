@@ -1,0 +1,91 @@
+<div class="orders-main-container">
+    <!-- <h2>Manage Recordings Registrations</h2> -->
+
+
+    <!-- 🔹 Filter Section -->
+    <div class="filter-section">
+        <!-- filter -->
+        <label for="filter">Filter by Recording Id:</label>
+        <select id="filter" [(ngModel)]="selectedRecId">
+            <option value="">All</option>
+            <option *ngFor="let r of allRecIds" [value]="r">{{ r }}</option>
+        </select>
+
+        <label class="payment-status-filter" for="filter">Filter by Payment Status:</label>
+        <select id="filter" [(ngModel)]="selectedPaymentStatus">
+            <option value="">All</option>
+            <option *ngFor="let title of statuses" [value]="title">{{ title }}</option>
+        </select>
+
+        <!-- search bar -->
+        <label for="searchPurchase" class="labelPurchaseId">Search by Purchase ID:</label>
+        <input id="searchPurchase" type="text" [(ngModel)]="purchaseSearch" placeholder="Enter Purchase ID" />
+    </div>
+
+    <div *ngIf="loading">Loading registrations...</div>
+    <div *ngIf="!loading && filteredRecordings.length === 0">No recording purchases found.</div>
+
+    <div class="orders-container">
+
+        <div *ngFor="let reg of filteredRecordings" class="order-card">
+            <!-- ✅ Send Email section -->
+            <svg *ngIf="reg.status === 'PaymentConfirmed' && !reg.emailSent" (click)="sendEmail(reg)"
+                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round" class="email-icon top-right">
+                <rect x="3" y="5" width="18" height="14" rx="2" ry="2"></rect>
+                <polyline points="3 7 12 13 21 7"></polyline>
+            </svg>
+
+
+            <h3>Purchase ID: {{ reg.purchaseId }}</h3>
+            <div class="product">
+                <div>
+                    <p><strong>Recording Id: </strong>{{ reg.recId }}</p>
+                </div>
+            </div>
+            <p><strong>Purchase Type: </strong>{{reg.purchaseType}}</p>
+            <p><strong>Name: </strong>{{reg.firstName}} {{reg.lastName}}</p>
+            <p><strong>Email: </strong>{{ reg.email }}</p>
+            <p><strong>Phone: </strong>{{reg.phone}}</p>
+            <p><strong>Secret Key: </strong>{{ reg.secretKey }}</p>
+
+            <p><strong>End Date:</strong> {{ reg.endDate | date:'medium'}}</p>
+
+
+            <div class="status-row">
+            <!-- <label for="status"><strong>Status: </strong></label> -->
+            <select id="status" [(ngModel)]="selectedStatuses[reg.id!]" (ngModelChange)="onStatusChange(reg, $event)">
+                <option *ngFor="let s of statuses" [value]="s">{{ s }}</option>
+            </select>
+
+            <!-- 💾 Save Icon -->
+            <svg *ngIf="selectedStatuses[reg.id!] !== reg.status" (click)="saveStatus(reg)"
+                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round" class="save-icon">
+                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
+                <polyline points="17 21 17 13 7 13 7 21" />
+                <polyline points="7 3 7 8 15 8" />
+            </svg>
+
+            <!-- Optional disabled look -->
+            <svg *ngIf="selectedStatuses[reg.id!] === reg.status" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                fill="none" stroke="#ccc" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+                class="save-icon disabled">
+                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
+                <polyline points="17 21 17 13 7 13 7 21" />
+                <polyline points="7 3 7 8 15 8" />
+            </svg>
+
+            </div>
+
+            
+            <!-- ✅ Success/Error Messages for status -->
+            <p class="success" *ngIf="reg.id && successMessages[reg.id]">{{ successMessages[reg.id] }}</p>
+            <p class="error" *ngIf="reg.id && errorMessages[reg.id]">{{ errorMessages[reg.id] }}</p>
+
+            <!-- ✅ Success/Error Messages for email -->
+            <p class="success" *ngIf="reg.id && emailSuccessMessages[reg.id]">{{ emailSuccessMessages[reg.id] }}</p>
+            <p class="error" *ngIf="reg.id && emailErrorMessages[reg.id]">{{ emailErrorMessages[reg.id] }}</p>
+        </div>
+    </div>
+</div>

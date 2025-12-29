@@ -1,0 +1,33 @@
+<div class="newsletter-container">
+  <p>Join the mailing list to receive updates and new releases:</p>
+  <form [formGroup]="emailForm" (ngSubmit)="subscribeNewsletter()">
+    <input type="email" formControlName="email" placeholder="Email address" />
+    <button type="submit" [disabled]="emailForm.invalid || isSubmitting">
+      {{ isSubmitting ? 'Subscribing...' : 'Subscribe' }}
+    </button>
+  </form>
+
+  <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
+  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+  <div class="questions">
+    <p>
+      <span class="question-text">Collaborations, questions? </span>
+      <span class="email-text">Email: {{emailId}}</span>
+    </p>
+    <div class="insta-follow">
+      <a [href]="instaUrl" target="_blank" class="insta-btn">
+        <!-- Instagram SVG icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M12 2.2c3.2 0 3.584.012 4.85.07 1.17.055 1.97.24 2.43.403a4.918 4.918 0 0 1 1.78 1.036 4.918 4.918 0 0 1 1.036 1.78c.163.46.348 1.26.403 2.43.058 1.266.07 1.65.07 4.85s-.012 3.584-.07 4.85c-.055 1.17-.24 1.97-.403 2.43a4.918 4.918 0 0 1-1.036 1.78 4.918 4.918 0 0 1-1.78 1.036c-.46.163-1.26.348-2.43.403-1.266.058-1.65.07-4.85.07s-3.584-.012-4.85-.07c-1.17-.055-1.97-.24-2.43-.403a4.918 4.918 0 0 1-1.78-1.036 4.918 4.918 0 0 1-1.036-1.78c-.163-.46-.348-1.26-.403-2.43-.058-1.266-.07-1.65-.07-4.85s.012-3.584.07-4.85c.055-1.17.24-1.97.403-2.43a4.918 4.918 0 0 1 1.036-1.78 4.918 4.918 0 0 1 1.78-1.036c.46-.163 1.26-.348 2.43-.403C8.416 2.212 8.8 2.2 12 2.2zm0-2.2C8.736 0 8.332.014 7.053.072 5.775.13 4.678.304 3.762.615a7.12 7.12 0 0 0-2.574 1.39A7.12 7.12 0 0 0 .615 4.578c-.31.916-.485 2.013-.543 3.29C0 8.332 0 8.736 0 12c0 3.264.014 3.668.072 4.947.058 1.277.232 2.374.543 3.29a7.12 7.12 0 0 0 1.39 2.574 7.12 7.12 0 0 0 2.574 1.39c.916.31 2.013.485 3.29.543C8.332 24 8.736 24 12 24s3.668-.014 4.947-.072c1.277-.058 2.374-.232 3.29-.543a7.12 7.12 0 0 0 2.574-1.39 7.12 7.12 0 0 0 1.39-2.574c.31-.916.485-2.013.543-3.29C24 15.668 24 15.264 24 12s-.014-3.668-.072-4.947c-.058-1.277-.232-2.374-.543-3.29a7.12 7.12 0 0 0-1.39-2.574 7.12 7.12 0 0 0-2.574-1.39c-.916-.31-2.013-.485-3.29-.543C15.668.014 15.264 0 12 0z" />
+          <path
+            d="M12 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a3.998 3.998 0 1 1 0-7.996 3.998 3.998 0 0 1 0 7.996z" />
+          <circle cx="18.406" cy="5.594" r="1.44" />
+        </svg>
+        Follow along on Instagram for daily studio updates.
+      </a>
+
+    </div>
+  </div>
+</div>

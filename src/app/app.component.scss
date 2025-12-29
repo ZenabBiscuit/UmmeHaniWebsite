@@ -1,0 +1,162 @@
+.app-layout {
+  display: flex;
+  overflow-x: hidden;   // ✅ prevent horizontal scroll
+  width: 100%; 
+}
+
+/* Sidebar (header) */
+app-header {
+  flex-shrink: 0;          // don't let it shrink
+  width: 220px;            // fixed sidebar width
+  height: 100vh;           // full height
+  position: fixed;         // fixed on the left
+  top: 0;
+  left: 0;
+  z-index: 1000;
+
+}
+
+/* Content Area */
+.content {
+  margin-left: 220px;      // push content to the right of sidebar
+  padding-left: 4rem;
+  padding-right: 2rem;
+  margin-top: 4rem;
+  max-width: 100%;
+  flex: 1;
+  margin-bottom: 0.5rem;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+  app-header {
+    width: 0;        // hide sidebar
+  }
+
+ .content, .content-admin {
+  margin-left: 0;          /* for mobile */
+  padding: 2rem 2rem;         /* small horizontal padding */
+  max-width: 100%;          /* prevent overflow */
+  box-sizing: border-box;   /* include padding in width */
+  overflow-x: hidden;       /* prevent horizontal scroll */
+}
+
+
+}
+
+.loader-overlay {
+  position: fixed;
+  inset: 0; /* full screen */
+  background: #f6f2ea;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000; // below header but above content
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #ddd;
+  border-top: 5px solid #333;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
+
+/* Make sure header stays above loader */
+app-header {
+  z-index: 3000;
+}
+
+
+.content-admin {
+  margin-left: 0px;
+  padding-left: 0rem !important;
+  padding-right: 0rem !important;
+  max-width: 100%;
+  flex: 1;
+}
+
+/* Default (desktop) — header always stays fixed */
+app-header {
+  top: 0;
+  transition: top 0.3s ease;
+}
+
+/* ✅ Only move header down when banner is visible — MOBILE ONLY */
+@media (max-width: 768px) {
+  .banner-visible app-header {
+    top: 40px !important; // same as banner height
+  }
+}
+
+.loader-overlay {
+  position: absolute;       // covers only the content area
+  inset: 0;
+  background: #f6f2ea;      // soft background
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.dots-loader-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dots-loader {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.dots-loader span {
+  width: 14px;
+  height: 14px;
+  background-color:#555;
+  border-radius: 50%;
+  animation: bounce 0.6s infinite alternate;
+}
+
+.dots-loader span:nth-child(2) { animation-delay: 0.2s; }
+.dots-loader span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes bounce {
+  from { transform: translateY(0); opacity: 0.6; }
+  to { transform: translateY(-12px); opacity: 1; }
+}
+
+/* Artistic caption */
+.loader-caption {
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--loader-caption);
+  text-align: center;
+  opacity: 0.8;
+  letter-spacing: 0.05em;
+}
+
+/* Optional: fade-in animation */
+.loader-overlay {
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Accessibility: reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  .dots-loader span {
+    animation: none;
+  }
+}
+

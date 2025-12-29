@@ -1,0 +1,161 @@
+.commissions-page {
+  max-width: 700px;
+  margin: auto;
+  box-sizing: border-box;
+}
+
+.commissions-page h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+
+.commissions-page form {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* center button */
+  width: 100%;
+}
+
+.commissions-page form .form-group {
+  width: 100%;
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.commissions-page form label {
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.commissions-page form input,
+.commissions-page form textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.commissions-page form .error {
+  text-align: left;
+  color: var(--error);
+  font-size: 0.9rem;
+  margin-top: 0.2rem;
+}
+
+.commissions-page button {
+  
+      align-self: center;
+  background: var(--button);
+  border: 1px solid black;
+  padding: 0.8rem 1.5rem;
+  cursor: pointer;
+  transition: background 0.3s;
+  
+  // max-width: 300px;
+  // min-width: 200px;
+
+  width: 100%;
+}
+
+.commissions-page button:hover:not(:disabled) {
+  background: var(--button-hover);
+}
+
+.commissions-page button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.commissions-page .success {
+  color: var(--success);
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.commissions-page .error {
+  color: var(--error);
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.commissions-page .faq {
+  margin-top: 2rem;
+}
+
+.commissions-page .faq h2 {
+  margin-bottom: 0.8rem;
+}
+
+.commissions-page .faq ul {
+  list-style: none;
+  padding: 0;
+}
+
+.commissions-page .faq ul li {
+  margin-bottom: 1rem;
+}
+
+.commissions-page .faq ul li strong {
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.note {
+  margin-top: 2.5rem;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* Additional helpers */
+.commissionForm .form-group {
+  text-align: left;
+}
+
+.intro-text {
+  padding-bottom: 3rem !important;
+}
+
+/* Angular form validation */
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+  border-color: var(--error) !important;
+}
+
+/* Responsive fixes */
+@media (max-width: 768px) {
+  
+  .commissions-page button {
+    
+    padding: 1rem;
+  }
+}
+
+.phone-row {
+  display: flex;
+  gap: 0.5rem;
+
+  .country-code {
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+  }
+
+  input {
+    flex: 1;
+  }
+}
+
+
+a {
+  color: #222;
+  font-style: italic;
+  text-decoration: underline;
+}
+
+a:hover {
+  color: grey;
+}

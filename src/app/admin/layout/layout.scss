@@ -1,0 +1,102 @@
+.admin-header {
+  background: var(--adminheader);
+  color: white;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+
+  .header-top {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      .home-button {
+        font-size: 1.8rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+
+        svg {
+          width: 1.2em;
+          height: 1.2em;
+          fill: white;
+          /* make SVG white */
+        }
+
+        &:hover svg {
+          fill: #e0e0e0;
+          /* optional hover effect */
+        }
+      }
+
+      .menu-toggle {
+        font-size: 1.8rem;
+        cursor: pointer;
+        background: none;
+        border: none;
+        color: white;
+        display: none;
+        /* hidden on desktop */
+      }
+    }
+  }
+
+  nav {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+
+    a {
+      color: white !important;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+
+      &.active {
+        background: #79babd;
+      }
+
+      &:hover {
+        background: #79babd;
+      }
+    }
+  }
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+
+  /* Show menu toggle only on mobile */
+  .admin-header .header-top .menu-toggle {
+    display: block !important;
+    /* force show on mobile */
+  }
+
+  /* Hide nav by default on mobile */
+  .admin-header nav {
+    display: none;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  /* Show nav when toggled */
+  .admin-header nav.show {
+    display: flex;
+  }
+}

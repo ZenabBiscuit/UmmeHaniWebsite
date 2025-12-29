@@ -1,0 +1,59 @@
+<div class="painting-detail" *ngIf="print">
+  <div class="painting-image">
+    <img [src]="selectedImage" [alt]="print.Title" />
+    <div class="thumbnails" *ngIf="print.MoreImages.length">
+  <div class="thumb-box" *ngFor="let img of MoreImgs" (click)="changeImage(img)">
+    <img [src]="img" [alt]="print.Title" [class.active]="img === selectedImage" />
+  </div>
+</div>
+  </div>
+
+  <div class="painting-info">
+    <h2>
+      {{ print.Title }}
+    </h2>
+
+    <p class="price" *ngIf="(selectedStatus | lowercase)==='available'">Price: ₹ {{ selectedPrice }}</p>
+    <p class="price" *ngIf="(selectedStatus | lowercase)==='sold'" style="visibility: hidden;">...</p>
+    
+    <p class="description">{{ print.Description }}</p>
+
+    <p class="medium">Medium: <span>{{ print.Medium }}</span></p>
+
+    <div class="size-options" *ngIf="sizes.length > 1">
+        <p class="size-label">Size:</p>
+        <div class="size-buttons">
+            <button
+            *ngFor="let s of sizes; let i = index"
+            [class.active]="s === selectedSize"
+            (click)="selectSize(i)"
+            >
+            {{ s }}
+            </button>
+        </div>
+    </div>
+    <div class="size-options" *ngIf="sizes.length > 0">
+        <p class="size-label">Size: <span>{{ selectedSize }}</span></p>
+        <!-- <div class="size-buttons">
+            <button
+            *ngFor="let s of sizes; let i = index"
+            [class.active]="s === selectedSize"
+            (click)="selectSize(i)"
+            >
+            {{ s }}
+            </button>
+        </div> -->
+    </div>
+    
+    <div class="sold-out-section" *ngIf="(selectedStatus | lowercase)==='sold'">
+      <p class="price-sold">SOLD OUT</p>
+      <p class="commisions-page">Liked this piece of art? Please visit the <a routerLink="/commissions">Commissions page</a> to get it customised.</p>
+    
+    </div>
+
+    <div class="ifPaintingAvailable" *ngIf="(selectedStatus | lowercase)==='available'">
+      <button class="add-to-cart" (click)="checkOut()">BUY NOW</button>
+
+    </div>
+  </div>
+</div>

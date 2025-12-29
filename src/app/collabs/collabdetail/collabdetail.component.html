@@ -1,0 +1,19 @@
+<div class="painting-detail" *ngIf="collab">
+    <div class="painting-image">
+        <img [src]="selectedImage" [alt]="collab.Title" />
+        <div class="thumbnails" *ngIf="collab.MoreImages?.length">
+            <div class="thumb-box" *ngFor="let img of MoreImgs" (click)="changeImage(img)">
+                <img [src]="img" [alt]="collab.Title" [class.active]="img === selectedImage" />
+            </div>
+        </div>
+    </div>
+
+    <div class="painting-info">
+        <h2>{{ collab.Title }}</h2>
+        <p class="description">{{ collab.Description }}</p>
+        <a [href]="collab.InstaUrl" target="_blank" rel="noopener noreferrer" class="insta-btn">
+           {{instaDisplay}}
+        </a>
+
+    </div>
+</div>

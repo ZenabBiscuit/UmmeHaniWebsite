@@ -1,0 +1,10 @@
+<div class="workshops-grid">
+  <div class="workshop-card" *ngFor="let rec of recordings" 
+    [routerLink]="(rec.Status | lowercase) === 'active' ? ['/recordings', rec.Id] : null"
+    [class.inactive]="(rec.Status | lowercase) === 'inactive'">
+    <img [src]="rec.ThumbnailUrl" [alt]="rec.Title" class="workshop-img" />
+    <p class="workshop-title">{{ rec.Title }}</p>
+    <p class="workshop-price" *ngIf="(rec.Status | lowercase) === 'active'">₹ {{rec.Price}}</p>
+    <p class="workshop-price" *ngIf="(rec.Status | lowercase) === 'inactive'">Not available</p>
+  </div>
+</div>

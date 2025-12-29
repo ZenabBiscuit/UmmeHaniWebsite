@@ -1,0 +1,28 @@
+<div class="bundle-page" *ngIf="bundle">
+  <div class="bundle-header">
+    <img [src]="bundle.ThumbnailUrl" [alt]="bundle.Title" class="bundle-img" />
+    <h2>{{ bundle.Title }}</h2>
+    <p>{{ bundle.Description }}</p>
+    
+
+    <p class="bundle-price">
+      <span class="strike">₹ {{ bundle.OriginalPrice }}</span>
+      <br>
+      <strong>₹ {{ bundle.BundlePrice }}</strong>
+      <span class="discount">({{ bundle.DiscountPercent }}% OFF)</span>
+    </p>
+
+    <button class="purchase-btn" (click)="purchaseBundle()">
+      PURCHASE BUNDLE
+    </button>
+  </div>
+
+  <div class="bundle-recordings">
+    <h3>Included Recordings</h3>
+    <div class="recording-card" *ngFor="let rec of bundle.RecordingList">
+      <img [src]="rec.ThumbnailUrl" [alt]="rec.Title" />
+      <p>{{ rec.Title }}</p>
+      <p>₹ {{ rec.Price }}</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,105 @@
+<!-- Loader -->
+<!-- <div class="loader-overlay" *ngIf="loading">
+  <div class="spinner"></div>
+  <p>Loading, please wait...</p>
+</div> -->
+
+<!-- <section class="hero">
+  <div class="hero-content fade-in">
+    <h1>Art That Invites Stillness</h1>
+    <p>Paintings, workshops, and reflections from the studio of Umme Hani</p>
+  </div>
+</section> -->
+
+<!-- Launch / Intro Overlay -->
+<div class="launch-overlay" *ngIf="showLaunch">
+  <div class="launch-content">
+    <h1 class="launch-title">Umme Hani</h1>
+    <p class="launch-subtitle">Art · Reflection · Creation</p>
+  </div>
+</div>
+
+
+<!-- Originals & Prints Section -->
+
+<p class="shop-header">The Collection</p>
+<p class="shop-tagline">From our studio to your walls</p>
+<div class="cards-collection">
+    <div class="card fade-in" *ngFor="let card of originalsAndPrints">
+      <div class="card-image" (click)="goToCategory(card.category)">
+        <img [src]="card.image" [alt]="card.category" />
+        <div class="card-overlay">
+          <h3>{{ card.category }}</h3>
+          <!-- <button>{{ card.category }}</button> -->
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="section-separator-between"></div>
+
+<!-- Workshops Section -->
+<p class="shop-header">Learn & Create</p>
+<p class="shop-tagline">Hands-on workshops to ignite your creative spark.</p>
+<div class="cards-workshops">
+  <div class="card fade-in" *ngFor="let card of workshops">
+    <div class="card-image" (click)="goToCategory(card.category)">
+      <img [src]="card.image" [alt]="card.category" />
+      <div class="card-overlay">
+        <h3>{{ card.category }}</h3>
+        <!-- <button>View More</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-separator"></div>
+
+<!-- Gallery Carousel Section -->
+<div class="gallery-section">
+  <p class="gallery-header">The Art Room</p>
+
+  <div class="carousel">
+    <button class="nav prev" (click)="prevSlide()">❮</button>
+
+    <div class="carousel-track" [style.transform]="'translateX(-' + currentIndex * 100 + '%)'">
+      <div class="gallery-item" *ngFor="let img of galleryImages">
+        <img [src]="img" alt="Gallery Image" (click)="goToGallery()" />
+      </div>
+    </div>
+
+    <button class="nav next" (click)="nextSlide()">❯</button>
+  </div>
+</div>
+
+
+
+<div class="section-separator"></div>
+
+<!-- Reviews Section -->
+<div class="reviews-section" *ngIf="approvedReviews.length > 0">
+  <p class="review-header">Reviews</p>
+
+  <div class="carousel-reviews">
+    <!-- Prev button -->
+    <button class="nav-reviews prev" (click)="prevSlideReviews()">❮</button>
+
+    <!-- Track -->
+    <div class="carousel-track-reviews" [style.transform]="'translateX(-' + currentIndexReviews * 100 + '%)'">
+      <div class="review-card" *ngFor="let r of approvedReviews">
+        <p class="review-text">“{{ r.review }}”</p>
+        <p class="review-name">— {{ r.name }}, {{r.city}}</p>
+      </div>
+    </div>
+
+    <!-- Next button -->
+    <button class="nav-reviews next" (click)="nextSlideReviews()">❯</button>
+  </div>
+</div>
+
+
+<hr class="section-separator-hr" />
+
+<app-contact></app-contact>
+
+<p class="copyrights">© 2026 Umme Hani. All rights reserved.</p>

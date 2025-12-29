@@ -1,0 +1,60 @@
+<div class="commissions-page">
+  
+  <form [formGroup]="commissionForm" (ngSubmit)="submitCommission()">
+    <div class="form-group">
+      <label for="name">Your Name</label>
+      <input id="name" formControlName="name" required />
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input id="email" type="email" formControlName="email" required />
+      <div *ngIf="commissionForm.get('email')?.invalid && commissionForm.get('email')?.touched" class="error">
+        Please enter a valid email.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="phone">Contact</label>
+      <div class="phone-row">
+        <select class="country-code" formControlName="countryCode">
+          <option *ngFor="let country of countryCodes" [value]="country.dial_code">
+            {{ country.flag }} ({{ country.dial_code }})
+          </option>
+        </select>
+        <input type="tel" formControlName="phone" placeholder="Phone Number" />
+      </div>
+    </div>
+
+    <div *ngIf="commissionForm.get('phone')?.touched && commissionForm.get('phone')?.invalid" class="error">
+      <small *ngIf="commissionForm.get('phone')?.errors?.['required']">Phone number is required</small>
+      <small *ngIf="commissionForm.get('phone')?.errors?.['pattern']">Enter a valid phone number</small>
+    </div>
+
+    <div class="form-group">
+      <label for="request">Commission Request</label>
+      <textarea id="request" rows="5" formControlName="request" required></textarea>
+    </div>
+
+    <button type="submit" [disabled]="commissionForm.invalid || submitting">
+      {{ submitting ? 'Submitting...' : 'Submit Request' }}
+    </button>
+  </form>
+
+  <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
+  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+  <!-- FAQ SECTION LOADED FROM SHEET -->
+  <div class="faq" *ngIf="sections.length > 0">
+    <h2>FAQ</h2>
+    <ul>
+      <li *ngFor="let item of sections">
+        <strong>{{ item.Question }}</strong>
+        <span>{{ item.Answer }}</span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- <p class="note"><em>Note: This is not a contact form. For questions, please use the <a routerLink="/contact">contact</a> page.</em></p> -->
+
+</div>

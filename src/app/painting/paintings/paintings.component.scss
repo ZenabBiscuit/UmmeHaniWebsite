@@ -1,0 +1,317 @@
+/* Grid for available and sold-out paintings */
+.paintings-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.soldout-tagline {
+    font-size: 1rem;
+    text-align: center;
+    color: #666;       // softer than main title
+    font-style: italic; // optional, gives artistic feel
+}
+
+/* Card for each painting */
+.painting-card {
+  background: var(--button); /* subtle off-white */
+  padding: 1rem;
+  border-radius: 0;
+  text-align: left;
+  border: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* subtle shadow */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* centers content vertically */
+  align-items: center; /* centers content horizontally */
+
+  img {
+    width: 300px;
+    height: 300px;           // fixed box height
+    object-fit: contain;       // scale image without distortion
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .painting-title {
+    font-size: 1.2rem;
+  margin-bottom: 0 !important;
+  margin-top: 0 !important;
+  }
+
+  .painting-price{
+    margin-top: 0.5rem;
+    margin-bottom: 0 !important;
+  }
+
+  .painting-medium {
+  margin-bottom: 0.25rem;
+}
+
+
+    .sold-text {
+      color: var(--error) !important;
+      font-size: 1rem;
+      
+    margin-top: 0.5rem;
+    margin-bottom: 0 !important;
+    }
+}
+
+/* Sold Out Section */
+.sold-out-section {
+  margin-top: 5rem;
+
+  .sold-out-header {
+    color: var(--error);
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+    text-align: center;
+  }
+
+}
+
+/* Painting Detail Page */
+.painting-detail {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2rem;
+
+  
+  .painting-info {
+    flex: 1;
+    color: #2c2c2c;
+
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .price {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      font-style: italic;
+    }
+
+    .price-sold {
+      color: var(--error);
+    }
+
+    .shipping {
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .description {
+      margin-bottom: 1rem;
+      text-align: justify;
+    }
+
+    .medium,
+    .size {
+      margin-bottom: 0.5rem;
+      font-style: italic;
+    }
+
+    span {
+      font-style: normal;
+    }
+
+    .add-to-cart {
+      background: var(--button);
+      border: 1px solid black;
+      padding: 0.75rem 1.5rem;
+      cursor: pointer;
+      margin-top: 2rem;
+      transition: background 0.3s ease;
+
+      &:hover:not(:disabled) {
+        background: var(--button-hover);
+      }
+
+      &:disabled {
+        cursor: not-allowed;
+        opacity: 0.6;
+        background: var(--button-disabled);
+      }
+    }
+  }
+}
+
+/* Thumbnails */
+.thumbnails {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  overflow: hidden;
+  padding-right: 0.5rem;
+
+  .thumb-box {
+    width: 70px;
+    height: 70px;
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;   // ensure thumbnail fits box
+      border-radius: 6px;
+      cursor: pointer;
+      transition: border 0.2s ease, transform 0.2s ease;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+
+    }
+  }
+}
+
+/* Shipping Check / Dropdown */
+.shipping-check {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin: 1rem 0;
+
+  input {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    flex: 1;
+  }
+
+  select {
+    flex: 1;
+    min-width: 150px;
+    max-width: 200px;
+    height: 36px;
+    padding: 0.4rem 1.5rem 0.4rem 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    appearance: none;
+    background: var(--button) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='16' height='16'><path fill='black' d='M7 10l5 5 5-5z'/></svg>") no-repeat right 0.6rem center;
+    background-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      border-color: #999;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: #c2a78f;
+      box-shadow: 0 0 0 3px rgba(194, 167, 143, 0.3);
+    }
+  }
+
+  button {
+    background: var(--button);
+    border: 1px solid black;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+
+    &:hover {
+      background: var(--button-hover);
+    }
+  }
+}
+
+/* Mobile responsive fixes */
+@media (max-width: 768px) {
+  .painting-detail {
+    flex-direction: column;
+  }
+
+  .shipping-check {
+    flex-direction: column;
+    width: 100%;
+
+    select {
+      width: 80%;
+    }
+  }
+
+  .painting-card{
+    img{
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  .painting-price,
+  .sold-text,
+  .painting-title{
+    align-self: flex-start;
+  }
+
+}
+
+/* Total Price & Commissions Page */
+.totalPrice {
+  font-size: 1.2rem;
+  margin-top: 1.5rem;
+}
+
+.commisions-page {
+  a {
+    color: #222;
+    font-style: italic;
+    text-decoration: underline;
+  }
+
+  a:hover {
+    color: grey;
+  }
+}
+
+/* Size Options Buttons */
+.size-options {
+  margin: 1rem 0;
+
+  .size-label {
+    margin-bottom: 0.5rem;
+    font-style: italic;
+  }
+
+  .size-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+
+    button {
+      padding: 0.5rem 1rem;
+      border: 1px solid #ccc;
+      background: #f9f9f9;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background: #eee;
+      }
+
+      &.active {
+        border: 2px solid black;
+      }
+    }
+  }
+}
+
+/* Tablet & below: flexible layout */
+@media (max-width: 1023px) {
+  .paintings-grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+}

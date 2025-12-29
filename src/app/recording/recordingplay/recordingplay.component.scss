@@ -1,0 +1,140 @@
+
+/* Popup Overlay */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+/* Popup Box */
+.popup {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.popup h2 {
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.popup label {
+  display: block;
+  margin: 0.8rem 0 0.3rem;
+  font-weight: 500;
+  text-align: left;
+}
+
+.popup input {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.popup button {
+  width: 100%;
+  background-color: var(--button);
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s;
+    padding: 1rem;
+    border: 1px solid black;
+}
+
+.popup button:hover  {
+    background: var(--button-hover); 
+}
+
+.error {
+  color: var(--error);
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+
+/* Recording Container */
+.recording-container {
+  width: 100%;
+  max-width: 900px;      /* keeps rectangle width */
+  margin: 2rem auto;
+  padding: 1rem;
+  position: relative;
+}
+
+/* Title */
+.recording-container h1 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+/* iframe wrapper to maintain 16:9 ratio */
+.iframe-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;     /* optional max size */
+  margin: 0 auto;
+  padding-bottom: 56.25%; /* 16:9 ratio (9 / 16 = 0.5625) */
+  height: 0;
+  overflow: hidden;
+  border-radius: 12px;    /* optional */
+}
+
+.iframe-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+/* Small devices */
+@media (max-width: 768px) {
+  .recording-container {
+    max-width: 100%;
+    padding: 0.5rem;
+  }
+
+  .recording-container h1 {
+    font-size: 1.4rem;
+  }
+}
+
+
+/* Small devices */
+@media (max-width: 768px) {
+  .popup {
+    padding: 1.5rem;
+  }
+
+  .popup h2 {
+    font-size: 1.3rem;
+  }
+
+  .popup input, .popup button {
+    font-size: 0.9rem;
+  }
+
+  .recording-container h1 {
+    font-size: 1.4rem;
+  }
+}

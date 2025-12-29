@@ -1,0 +1,7 @@
+<div class="paintings-grid">
+  <div class="painting-card" *ngFor="let print of prints" [routerLink]="['/prints', print.Id]">
+    <img [src]="print.Image" [alt]="print.Title" class="painting-img" />
+    <p class="painting-title">{{ print.Title }}</p>
+    <p class="painting-medium">{{ print.Medium }}</p>
+  </div>
+</div>

@@ -1,0 +1,80 @@
+  .payment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  overflow-y: auto;
+  justify-content: flex-start;
+
+  h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #2c2c2c;
+    text-align: center;
+    margin-top: 0 !important;
+  }
+
+  p {
+    margin: 0 0;
+    color: #444;
+    text-align: center;
+  }
+
+  qrcode {
+    width: 200px; 
+    height: 200px; /* ✅ fixes jumpy resizing */
+    display: block;
+    margin: 1rem 0;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  .upi-link {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
+    a{
+        color: black;
+    }
+    
+    a:hover{
+        color: grey;
+    }
+  }
+
+  .msgConfirmation{
+    margin-top: 1.5rem;
+  }
+
+  .confirmPayment{
+
+    background: var(--button);
+    // color: #444;
+    margin-top: 1rem;;
+      border: 1px solid black;
+      padding: 1rem 5rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+
+      &:hover:not(:disabled) {
+        background: var(--button-hover); // ✅ only apply hover when NOT disabled
+        }
+
+    &:disabled {
+        cursor: not-allowed;
+        opacity: 0.6; // ✅ visually show disabled
+        background: var(--button-disabled);
+    }
+  }
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #aaa;
+  width: 90%;         /* shorter width */
+  margin: 1rem auto;  /* center */
+}

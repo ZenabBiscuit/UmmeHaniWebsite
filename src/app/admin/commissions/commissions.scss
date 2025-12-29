@@ -1,0 +1,69 @@
+.commissions-admin {
+  padding: 1rem;
+}
+
+.request-card {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  background: #fafafa;
+}
+
+/* Heading inside card */
+.request-card h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+/* Text inside card */
+.request-card p {
+  margin: 0.3rem 0;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+/* Delete button (same style as Save button in orders/registrations) */
+.request-card button {
+  margin-top: 0.5rem;
+  margin-left: 0;
+  padding: 0.5rem 1rem;
+  background: #e74c3c;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.3s ease;
+}
+
+.request-card button:hover {
+  background: #c0392b;
+}
+
+.request-card button:disabled {
+  background: #bbb;
+  cursor: not-allowed;
+}
+
+/* ✅ Responsive (Mobile) */
+@media (max-width: 768px) {
+  .request-card {
+    padding: 0.8rem;
+  }
+
+  .request-card h3 {
+    font-size: 1rem;
+  }
+
+  .request-card p {
+    font-size: 0.9rem;
+  }
+
+  .request-card button {
+    width: 100%;
+    margin-top: 0.8rem;
+    font-size: 1rem;
+  }
+}

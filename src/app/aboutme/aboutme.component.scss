@@ -1,0 +1,44 @@
+.about-container {
+  color: #2c2c2c;
+  line-height: 1.6;
+}
+
+.about-section {
+  margin-bottom: 2rem;
+
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+    color: #333;
+  }
+
+  p {
+    // font-size: 1rem;
+    margin: 0;
+    text-align: justify;
+  }
+}
+
+.about-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: 100%;
+    max-width: 350px;
+    height: 350px; // ✅ force square
+    border-radius: 50%; // ✅ circle
+    object-fit: cover; // ✅ crops evenly
+    object-position: center; // ✅ keeps subject centered
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* 📱 Mobile adjustment */
+@media (max-width: 768px) {
+  .about-image img {
+    max-width: 250px;
+    height: 250px; // ✅ keep square
+  }
+}

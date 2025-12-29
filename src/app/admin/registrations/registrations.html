@@ -1,0 +1,73 @@
+<div class="orders-main-container">
+  <!-- <h2>Manage Registrations</h2> -->
+
+  
+  <!-- 🔹 Filter Section -->
+  <div class="filter-section">
+    <label for="filter">Filter by Workshop:</label>
+    <select id="filter" [(ngModel)]="selectedWorkshop">
+      <option value="">All</option>
+      <option *ngFor="let title of workshopTitles" [value]="title">{{ title }}</option>
+    </select>
+
+    <label class="payment-status-filter" for="filter">Filter by Payment Status:</label>
+    <select id="filter" [(ngModel)]="selectedPaymentStatus">
+      <option value="">All</option>
+      <option *ngFor="let title of statuses" [value]="title">{{ title }}</option>
+    </select>
+
+    <!-- search bar -->
+        <label for="searchPurchase" class="labelPurchaseId">Search by Registration ID:</label>
+        <input id="searchPurchase" type="text" [(ngModel)]="purchaseSearch" placeholder="Enter Registration ID" />
+  </div>
+
+  <div *ngIf="loading">Loading registrations...</div>
+  <div *ngIf="!loading && filteredRegistrations.length === 0">No registrations found.</div>
+
+
+  <div class="orders-container">
+    <div *ngFor="let reg of filteredRegistrations" class="order-card">
+    <h3>Registration ID: {{ reg.registrationId }}</h3>
+    <div class="product">
+      <div>
+        <p><strong>Workshop: </strong>{{ reg.product.Title }} - {{reg.product.ModeSelected}}</p>
+      </div>
+    </div>
+    <p><strong>Participant Name:</strong> {{ reg.firstName }} {{ reg.lastName }}</p>
+    <p><strong>Email:</strong> {{ reg.email }}</p>
+    <p><strong>Phone:</strong> {{ reg.phone }}</p>
+
+    <div class="status-row">
+    <!-- <label for="status"><strong>Status:  </strong></label> -->
+    <select
+        id="status"
+        [(ngModel)]="selectedStatuses[reg.id!]"
+        (ngModelChange)="onStatusChange(reg, $event)">
+        <option *ngFor="let s of statuses" [value]="s">{{ s }}</option>
+    </select>
+
+    <!-- 💾 Save Icon -->
+            <svg *ngIf="selectedStatuses[reg.id!] !== reg.status" (click)="saveStatus(reg)"
+                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round" class="save-icon">
+                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
+                <polyline points="17 21 17 13 7 13 7 21" />
+                <polyline points="7 3 7 8 15 8" />
+            </svg>
+
+            <!-- Optional disabled look -->
+            <svg *ngIf="selectedStatuses[reg.id!] === reg.status" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                fill="none" stroke="#ccc" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+                class="save-icon disabled">
+                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
+                <polyline points="17 21 17 13 7 13 7 21" />
+                <polyline points="7 3 7 8 15 8" />
+            </svg>
+            </div>
+
+    <!-- ✅ Success/Error Messages -->
+    <p class="success" *ngIf="reg.id && successMessages[reg.id]">{{ successMessages[reg.id] }}</p>
+    <p class="error" *ngIf="reg.id && errorMessages[reg.id]">{{ errorMessages[reg.id] }}</p>
+  </div>
+  </div>
+</div>

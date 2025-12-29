@@ -1,0 +1,58 @@
+<div class="painting-detail" *ngIf="painting">
+  <!-- IMAGE SECTION -->
+  <div class="painting-image">
+    <img [src]="selectedImage" [alt]="painting.Title" />
+    <div class="thumbnails" *ngIf="MoreImgs.length > 0">
+      <div class="thumb-box" *ngFor="let img of MoreImgs" (click)="changeImage(img)">
+        <img [src]="img" [alt]="painting.Title" [class.active]="img === selectedImage"/>
+      </div>
+    </div>
+  </div>
+
+  <!-- INFO SECTION -->
+  <div class="painting-info">
+    <h2>{{ painting.Title }}</h2>
+
+    <!-- PRICE / AVAILABLE -->
+    <div *ngIf="(painting.Stock | lowercase) === 'available' && (painting.Price | lowercase) !== 'price upon request'">
+      <p class="price" *ngIf="selectedPrice !== null">Price: ₹{{ selectedPrice }}</p>
+    </div>
+
+    <!-- DESCRIPTION -->
+    <p class="description">{{ selectedDescription || painting.Description }}</p>
+
+    <!-- MEDIUM & SIZE -->
+    <p class="medium">Medium: <span>{{ painting.Medium }}</span></p>
+    <p class="size">Size: <span>{{ painting.Size }}</span></p>
+
+    <!-- PARTS SELECTION -->
+    <div class="part-options" *ngIf="parts.length > 0">
+      <div class="part-buttons">
+        <button
+          *ngFor="let part of parts; let i = index"
+          [class.active]="part === selectedPart"
+          (click)="selectPart(i)"
+        >
+          {{ part }}
+        </button>
+      </div>
+    </div>
+
+    <!-- SOLD OUT -->
+    <div class="sold-out-section" *ngIf="(painting.Stock | lowercase) === 'sold'">
+      <p class="price-sold">SOLD OUT</p>
+      <p class="commisions-page">
+        Liked this piece of art? Please visit the <a routerLink="/commissions">Commissions page</a> to get it customised.
+      </p>
+    </div>
+
+    <!-- BUY NOW -->
+    <div class="ifPaintingAvailable" *ngIf="(painting.Stock | lowercase) === 'available' && (painting.Price | lowercase) !== 'price upon request'">
+      <button class="add-to-cart" (click)="checkOut()">BUY NOW</button>
+    </div>
+    <p class="price-on-request" *ngIf="painting.Price.toLowerCase() === 'price upon request'">
+        Price available on request. Please reach out to 
+        <a [href]="instaUrl" target="_blank" class="insta-btn">@{{ instagramId }}</a> for details.
+      </p>
+  </div>
+</div>

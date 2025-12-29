@@ -1,0 +1,50 @@
+<div class="reviews-container">
+
+<p>We'd love to hear from you!</p>
+<p class="feebdacktext">
+    Your feedback helps us improve and also guides others in making the right choice. Whether it's a few words or a detailed story, your review makes a difference. So go ahead, share your experience with us! 
+</p>
+  <h2>Leave a Review</h2>
+
+  <form (ngSubmit)="submitReview()" [formGroup]="reviewForm">
+    <div class="form-group">
+      <label for="name">Your Name</label>
+      <input
+        type="text"
+        id="name"
+        formControlName="name"
+        name="name"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="city">Your City</label>
+      <input
+        type="text"
+        id="city"
+        formControlName="city"
+        name="city"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="review">Your Review</label>
+      <textarea
+        id="review"
+        formControlName="review"
+        name="review"
+        rows="5"
+        required
+      ></textarea>
+    </div>
+
+    <button type="submit" [disabled]="isSubmitting || reviewForm.invalid">
+      {{ isSubmitting ? 'Submitting...' : 'Submit Review' }}
+    </button>
+  </form>
+
+  <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
+  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+</div>

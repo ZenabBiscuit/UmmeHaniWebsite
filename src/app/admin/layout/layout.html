@@ -1,0 +1,33 @@
+<header class="admin-header">
+  <div class="header-top">
+    <h1>Admin Portal</h1>
+
+    <div class="header-actions">
+      <!-- Home Button (SVG white) -->
+      <button class="home-button" [routerLink]="['/']">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 24 24" fill="white">
+    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+  </svg>
+      </button>
+
+      <!-- Hamburger Toggle -->
+      <button class="menu-toggle" (click)="toggleMenu()">☰</button>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav [ngClass]="{ show: menuOpen }">
+    <a routerLink="/admin_ummehani@786110" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="menuOpen = false">Dashboard</a>
+    <a routerLink="/admin_ummehani@786110/originals" routerLinkActive="active" (click)="menuOpen = false">Originals</a>
+    <a routerLink="/admin_ummehani@786110/prints" routerLinkActive="active" (click)="menuOpen = false">Prints</a>
+    <a routerLink="/admin_ummehani@786110/wsregistrations" routerLinkActive="active" (click)="menuOpen = false">Workshop-Registrations</a>
+    <a routerLink="/admin_ummehani@786110/recordings" routerLinkActive="active" (click)="menuOpen = false">Recordings</a>
+    <a routerLink="/admin_ummehani@786110/bundles" routerLinkActive="active" (click)="menuOpen = false">Bundles</a>
+    <a routerLink="/admin_ummehani@786110/reviews" routerLinkActive="active" (click)="menuOpen = false">Reviews</a>
+    <a routerLink="/admin_ummehani@786110/commissions" routerLinkActive="active" (click)="menuOpen = false">Commissions</a>
+  </nav>
+</header>
+
+<main>
+  <router-outlet></router-outlet>
+</main>

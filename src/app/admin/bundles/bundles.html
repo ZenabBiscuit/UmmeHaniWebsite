@@ -1,0 +1,90 @@
+<div class="orders-main-container">
+  <!-- 🔹 Filter Section -->
+  <div class="filter-section">
+    <label for="filter">Filter by Bundle:</label>
+    <select id="filter" [(ngModel)]="selectedBundleTitle">
+      <option value="">All</option>
+      <option *ngFor="let b of allBundleTitles" [value]="b">{{ b }}</option>
+    </select>
+
+    <label class="payment-status-filter" for="filter">Filter by Payment Status:</label>
+    <select id="filter" [(ngModel)]="selectedPaymentStatus">
+      <option value="">All</option>
+      <option *ngFor="let status of statuses" [value]="status">{{ status }}</option>
+    </select>
+
+    <label for="searchPurchase" class="labelPurchaseId">Search by Purchase ID:</label>
+    <input id="searchPurchase" type="text" [(ngModel)]="purchaseSearch" placeholder="Enter Purchase ID" />
+  </div>
+
+  <div *ngIf="loading">Loading bundle registrations...</div>
+  <div *ngIf="!loading && filteredBundles.length === 0">No bundle purchases found.</div>
+
+  <div class="orders-container">
+    <div *ngFor="let reg of filteredBundles" class="order-card">
+      <!-- ✅ Send Email section -->
+            <svg *ngIf="reg.status === 'PaymentConfirmed' && !reg.emailSent && !isEmailSending[reg.docId!]" (click)="sendEmail(reg)"
+                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round" class="email-icon  top-right">
+                <rect x="3" y="5" width="18" height="14" rx="2" ry="2"></rect>
+                <polyline points="3 7 12 13 21 7"></polyline>
+            </svg>
+
+            <!-- Spinner for email sending -->
+<svg *ngIf="isEmailSending[reg.docId!]" 
+    xmlns="http://www.w3.org/2000/svg" 
+    viewBox="0 0 50 50" 
+    class="spinner top-right">
+    <circle cx="25" cy="25" r="20" stroke="gray" stroke-width="5" fill="none"></circle>
+    <circle cx="25" cy="25" r="20" stroke="green" stroke-width="5" fill="none" stroke-dasharray="125.6" stroke-dashoffset="31.4">
+      <animateTransform attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="1s" repeatCount="indefinite"/>
+    </circle>
+</svg>
+        <h3>Purchase ID: {{ reg.bundlePurchaseId }}</h3>
+      <div class="product">
+        <p><strong>Bundle Id:</strong> {{ reg.bundleId }}</p>
+        <p><strong>Bundle Title:</strong> {{ reg.bundleTitle }}</p>
+<p *ngIf="reg.Recordings?.length">
+  <strong>Recordings included: </strong>
+  <span>{{ getRecordingTitles(reg.Recordings) }}</span>
+</p>
+<p *ngIf="!reg.Recordings?.length">No recordings included.</p>
+
+
+      </div>
+
+      <p><strong>Name:</strong> {{ reg.firstName }} {{ reg.lastName }}</p>
+      <p><strong>Email:</strong> {{ reg.email }}</p>
+      <p><strong>Phone:</strong> {{ reg.phone }}</p>
+      <div class="status-row">
+        <select [(ngModel)]="selectedStatuses[reg.docId!]" (ngModelChange)="onStatusChange(reg, $event)">
+          <option *ngFor="let status of statuses" [value]="status">{{ status }}</option>
+        </select>
+
+        <svg *ngIf="selectedStatuses[reg.docId!] !== reg.status" (click)="saveStatus(reg)"
+             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1.8"
+             stroke-linecap="round" stroke-linejoin="round" class="save-icon">
+          <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
+          <polyline points="17 21 17 13 7 13 7 21" />
+          <polyline points="7 3 7 8 15 8" />
+        </svg>
+
+        <svg *ngIf="selectedStatuses[reg.docId!] === reg.status" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+             fill="none" stroke="#ccc" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+             class="save-icon disabled">
+          <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
+          <polyline points="17 21 17 13 7 13 7 21" />
+          <polyline points="7 3 7 8 15 8" />
+        </svg>
+      </div>
+
+      <!-- ✅ Success/Error Messages for status -->
+      <p class="success" *ngIf="reg.docId && successMessages[reg.docId]">{{ successMessages[reg.docId] }}</p>
+      <p class="error" *ngIf="reg.docId && errorMessages[reg.docId]">{{ errorMessages[reg.docId] }}</p>
+
+      <!-- ✅ Success/Error Messages for email -->
+            <p class="success" *ngIf="reg.docId && emailSuccessMessages[reg.docId]">{{ emailSuccessMessages[reg.docId] }}</p>
+            <p class="error" *ngIf="reg.docId && emailErrorMessages[reg.docId]">{{ emailErrorMessages[reg.docId] }}</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,110 @@
+<div class="payment-confirmation">
+  <h2>Thank You!</h2>
+
+  <!-- confirmation for orders -->
+  <div class="confirmation" *ngIf="type==='originals' || type==='prints'">
+    <p>Your order <strong>{{ orderId }}</strong> has been placed.</p>
+  </div>
+
+
+  <!-- confirmation for workshop -->
+  <div class="confirmation" *ngIf="type==='workshop'">
+    <p>
+      You are registered for the workshop!
+      <br>
+      Your registration id is <strong>{{orderId}}</strong>
+    </p>
+  </div>
+
+
+  <!-- confirmation for recording -->
+  <div class="confirmation" *ngIf="type==='recording'">
+    <p>
+      You have purchased the recording!
+      <br>
+      Your purchase id is <strong>{{orderId}}</strong>
+    </p>
+
+
+    <div class="purchaseDet">
+      <p><strong>Email: </strong> {{ email }}</p>
+      <p><strong>Secret Key: </strong> <code>{{ secretKey }}</code></p>
+      <br>
+
+      <small>⚠️ Keep your secret key safe. You’ll need it to unlock the recording.</small>
+    </div>
+  </div>
+
+  <!-- confirmation for bundle -->
+  <div class="confirmation" *ngIf="type==='bundle'">
+    <p>
+      You have purchased the {{regData.bundleTitle}}!
+      <br>
+      Your purchase id is <strong>{{ orderId }}</strong>
+    </p>
+
+    <div class="purchaseDet">
+      <!-- <p><strong>Email: </strong> {{ email }}</p>
+    <p><strong>Secret Key: </strong> <code>{{ secretKey }}</code></p> -->
+
+      <p><i>Recordings included:</i></p>
+      <ul class="recordings-list">
+        <li *ngFor="let rec of recordings">
+          {{ rec.Title}}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+
+
+  <hr />
+
+  <p class="important">Important!</p>
+  <p *ngIf="type === 'originals' || type === 'prints'">
+    Please send the
+    <span class="italic-text">payment screenshot</span>
+    along with your
+    <span class="italic-text">order id</span>
+    to our
+    <a [href]="instaUrl" target="_blank" rel="noopener noreferrer" class="instagram-button">
+      Instagram
+    </a>
+    for confirmation!
+  </p>
+
+  <p *ngIf="type === 'workshop'">
+    Please send the
+    <span class="italic-text">payment screenshot</span>
+    along with your
+    <span class="italic-text">registration id</span>
+    to our
+    <a [href]="instaUrl" target="_blank" rel="noopener noreferrer" class="instagram-link">
+      Instagram
+    </a>
+    to complete workshop enrollment!
+  </p>
+
+  <p *ngIf="type === 'recording'">
+    Please send the
+    <span class="italic-text">payment screenshot</span>
+    along with your
+    <span class="italic-text">purchase id</span>
+    to our
+    <a [href]="instaUrl" target="_blank" rel="noopener noreferrer" class="instagram-link">
+      Instagram
+    </a>
+    to get access to the recording!
+  </p>
+
+  <p *ngIf="type === 'bundle'">
+    Please send the
+    <span class="italic-text">payment screenshot</span>
+    along with your
+    <span class="italic-text">purchase id</span>
+    to our
+    <a [href]="instaUrl" target="_blank" rel="noopener noreferrer" class="instagram-link"> Instagram</a>
+    to get access to the recordings!
+  </p>
+
+</div>

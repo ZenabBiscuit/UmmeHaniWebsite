@@ -1,0 +1,17 @@
+<div class="painting-detail" *ngIf="recording">
+  <div class="painting-image">
+    <img [src]="recording.ThumbnailUrl" [alt]="recording.Title" />
+    
+  </div>
+
+  <div class="workshop-info">
+    <h2>
+      {{ recording.Title }}
+    </h2>
+    <p class="totalPrice" *ngIf="(recording.Status | lowercase) === 'active'">Access Fee: ₹ {{ recording.Price }}</p>
+    
+    <p class="access-note">Note: You'll have access to this recording for {{recording.AccessDays}} days from the date of purchase.</p>
+
+    <button class="add-to-cart" (click)="checkOut()">PURCHASE NOW</button>
+
+  </div>

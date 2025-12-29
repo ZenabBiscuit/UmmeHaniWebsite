@@ -1,0 +1,8 @@
+<div class="paintings-grid">
+  <div class="painting-card" *ngFor="let collab of collaborations" [routerLink]="['/collaborations', collab.Id]">
+    <img [src]="collab.Image" [alt]="collab.Title" class="painting-img" />
+    <p class="painting-title">{{ collab.Title }}</p>
+    <!-- <p class="painting-medium">{{ collab.Description }}</p> -->
+    <!-- <a [href]="collab.InstaUrl" target="_blank">{{collab.CollaboratorInstagramId}}</a> -->
+  </div>
+</div>
