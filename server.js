@@ -18,7 +18,7 @@ app.post('/api/newsletter', async (req, res) => {
   const to = recipients.slice(0, 1000).map(email => ({ email }));
 
   const payload = {
-    sender: { name: 'UmmeHani', email: 'ummehani.tin@gmail.com' },
+    sender: { name: 'UmmeHani', email: 'zenabbw6@gmail.com' },
     to,
     subject,
     htmlContent: html
