@@ -5,16 +5,16 @@ const cors = require('cors');
 
 const app = express();
 
-/* -------------------- CORS (Angular safe) -------------------- */
+/* -------------------- CORS (FIXED) -------------------- */
 app.use(cors({
   origin: '*',
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type']
 }));
-app.options('*', cors());
 
 /* -------------------- Body parser -------------------- */
 app.use(express.json());
+
 
 /* -------------------- Env vars -------------------- */
 const GMAIL_USER = process.env.GMAIL_USER; // ummehani.arts@gmail.com
