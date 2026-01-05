@@ -20,8 +20,8 @@ app.post('/api/newsletter', async (req, res) => {
   const payload = {
     sender: { name: 'UmmeHani', email: 'ummehani.arts@gmail.com' },
     replyTo: {
-    email: 'support@ummehani.com',
-    name: 'UmmeHani Support'
+    email: 'ummehani.arts@gmail.com',
+    name: 'UmmeHani'
   },
     to,
     subject,
