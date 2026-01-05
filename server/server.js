@@ -11,6 +11,7 @@ app.use(express.json());
 const GMAIL_USER = process.env.GMAIL_USER; // ummehani.arts@gmail.com
 const GMAIL_APP_PASSWORD = process.env.GMAIL_APP_PASSWORD;
 
+// Nodemailer transporter
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -27,21 +28,31 @@ app.post('/api/newsletter', async (req, res) => {
   }
 
   try {
-    // Send emails one by one (Gmail free limit is 100/day)
-    for (const email of recipients) {
-      await transporter.sendMail({
-        from: `"Umme Hani" <${GMAIL_USER}>`,
-        to: email,
-        replyTo: `"Umme Hani" <${GMAIL_USER}>`,
-        subject,
-        html
-      });
-      console.log(`Email sent to ${email}`);
-    }
+    // Send emails in parallel but log success/failure per recipient
+    const results = await Promise.all(
+      recipients.map(email =>
+        transporter.sendMail({
+          from: `"Umme Hani" <${GMAIL_USER}>`,
+          to: email,
+          replyTo: `"Umme Hani" <${GMAIL_USER}>`,
+          subject,
+          html
+        })
+        .then(() => ({ email, status: 'sent' }))
+        .catch(err => ({ email, status: 'failed', error: err.message }))
+      )
+    );
 
-    return res.json({ ok: true, message: 'Emails sent successfully' });
+    // Separate success and failed emails
+    const sent = results.filter(r => r.status === 'sent').map(r => r.email);
+    const failed = results.filter(r => r.status === 'failed');
+
+    console.log('Sent emails:', sent);
+    if (failed.length > 0) console.error('Failed emails:', failed);
+
+    return res.json({ ok: true, sent, failed });
   } catch (err) {
-    console.error('Error sending email:', err);
+    console.error('Error sending emails:', err);
     return res.status(500).json({ ok: false, error: err.message });
   }
 });
