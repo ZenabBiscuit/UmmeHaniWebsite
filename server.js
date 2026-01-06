@@ -36,7 +36,8 @@ app.post('/api/newsletter', async (req, res) => {
       name: 'UmmeHani',
       email: 'ummehani.arts@gmail.com'
     },
-    to,
+    to: [{ email: 'ummehani.arts@gmail.com' }], // a placeholder or your own email
+    bcc: recipients.map(email => ({ email })), // all subscribers hidden
     subject,
     htmlContent: html
   };
