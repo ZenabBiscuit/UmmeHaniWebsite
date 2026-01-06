@@ -5,53 +5,44 @@ const cors = require('cors');
 
 const app = express();
 app.use(cors());
-app.use(express.json({ limit: '10mb' })); // 👈 allow base64 safely
+app.use(express.json());
 
 const BREVO_API_KEY = process.env.BREVO_API_KEY;
 
 app.post('/api/newsletter', async (req, res) => {
+  const { subject, html, recipients } = req.body;
+
+  // Basic validation
+  if (
+    !subject ||
+    !html ||
+    !Array.isArray(recipients) ||
+    recipients.length === 0
+  ) {
+    return res.status(400).json({
+      error: 'subject, html and recipients are required'
+    });
+  }
+
+  // Brevo allows up to 1000 recipients per request
+  const to = recipients.slice(0, 1000).map(email => ({ email }));
+
+  const payload = {
+    sender: {
+      name: 'UmmeHani',
+      email: 'ummehani.arts@gmail.com'
+    },
+    replyTo: {
+      name: 'UmmeHani',
+      email: 'ummehani.arts@gmail.com'
+    },
+    to,
+    subject,
+    htmlContent: html
+  };
+
   try {
-    const { subject, html, recipients, attachment } = req.body;
-
-    // 🔒 Validation
-    if (
-      !subject ||
-      !html ||
-      !Array.isArray(recipients) ||
-      recipients.length === 0
-    ) {
-      return res.status(400).json({
-        error: 'subject, html, recipients are required'
-      });
-    }
-
-    const to = recipients.slice(0, 1000).map(email => ({ email }));
-
-    const payload = {
-      sender: {
-        name: 'UmmeHani',
-        email: 'ummehani.arts@gmail.com'
-      },
-      replyTo: {
-        name: 'UmmeHani',
-        email: 'ummehani.arts@gmail.com'
-      },
-      to,
-      subject,
-      htmlContent: html
-    };
-
-    // 📎 OPTIONAL attachment
-    if (attachment?.base64 && attachment?.name) {
-      payload.attachment = [
-        {
-          name: attachment.name,
-          content: attachment.base64.split(',')[1] // remove data:image/*
-        }
-      ];
-    }
-
-    const resp = await axios.post(
+    const response = await axios.post(
       'https://api.brevo.com/v3/smtp/email',
       payload,
       {
@@ -62,7 +53,7 @@ app.post('/api/newsletter', async (req, res) => {
       }
     );
 
-    return res.json({ ok: true, data: resp.data });
+    return res.json({ ok: true, data: response.data });
 
   } catch (err) {
     console.error('Brevo error:', err.response?.data || err.message);
@@ -75,5 +66,5 @@ app.post('/api/newsletter', async (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () =>
-  console.log(`🚀 Newsletter server running on port ${PORT}`)
+  console.log(`🚀 Server running on port ${PORT}`)
 );
